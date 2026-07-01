@@ -7145,6 +7145,255 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 ._access-icon {
   display: flex !important;
 }
+
+/* AI-generated section */
+.family-law-section {
+  background-color: #ffffff;
+  padding: 80px 20px 100px 20px;
+  direction: rtl;
+  font-family: system-ui, sans-serif;
+  color: #1a1a2e;
+  line-height: 1.6;
+}
+
+.family-law-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header Block */
+.family-law-header {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.family-law-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #11124A;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+}
+
+.family-law-subtitle {
+  font-size: 1.2rem;
+  color: #4a4a6a;
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.family-law-header-accent {
+  width: 80px;
+  height: 4px;
+  background-color: #11124A;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Image Wrapper */
+.family-law-image-wrapper {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(17, 18, 74, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.family-law-image-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(17, 18, 74, 0.15);
+}
+
+.family-law-hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
+
+/* Services Grid */
+.family-law-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.family-law-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(17, 18, 74, 0.15);
+  border-radius: 14px;
+  padding: 35px 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.family-law-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(17, 18, 74, 0.1);
+  border-color: rgba(17, 18, 74, 0.4);
+}
+
+.family-law-card-icon {
+  color: #11124A;
+  margin-bottom: 20px;
+  background-color: rgba(17, 18, 74, 0.05);
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.family-law-card:hover .family-law-card-icon {
+  background-color: rgba(17, 18, 74, 0.1);
+}
+
+.family-law-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #11124A;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.family-law-card-text {
+  font-size: 1rem;
+  color: #4a4a6a;
+  line-height: 1.75;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* CTA Block */
+.family-law-cta-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.family-law-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #11124A;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 18px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(17, 18, 74, 0.25);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.family-law-cta-button:hover {
+  background-color: #1a1b5e;
+  box-shadow: 0 12px 35px rgba(17, 18, 74, 0.35);
+  transform: translateY(-3px);
+  color: #ffffff;
+}
+
+.family-law-cta-button:focus-visible {
+  outline: 3px solid #11124A;
+  outline-offset: 3px;
+}
+
+.family-law-cta-icon {
+  transition: transform 0.3s ease;
+  transform: scaleX(-1); /* Flip for RTL arrow direction */
+}
+
+.family-law-cta-button:hover .family-law-cta-icon {
+  transform: scaleX(-1) translateX(-5px);
+}
+
+.family-law-cta-subtext {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  color: #6b6b8a;
+  font-weight: 400;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .family-law-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .family-law-title {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .family-law-section {
+    padding: 60px 16px 80px 16px;
+  }
+
+  .family-law-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .family-law-title {
+    font-size: 2rem;
+  }
+
+  .family-law-subtitle {
+    font-size: 1.05rem;
+    padding: 0 10px;
+  }
+
+  .family-law-card {
+    padding: 25px 20px;
+  }
+
+  .family-law-card-title {
+    font-size: 1.2rem;
+  }
+
+  .family-law-cta-button {
+    width: 100%;
+    max-width: 350px;
+    padding: 16px 30px;
+    font-size: 1.1rem;
+  }
+
+  .family-law-image-wrapper {
+    margin-bottom: 40px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .family-law-title {
+    font-size: 1.7rem;
+  }
+  
+  .family-law-subtitle {
+    font-size: 1rem;
+  }
+
+  .family-law-card {
+    padding: 20px 16px;
+  }
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
