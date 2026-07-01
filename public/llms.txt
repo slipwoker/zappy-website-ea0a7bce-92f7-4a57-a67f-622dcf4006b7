@@ -7,41 +7,41 @@
 ## Pages
 
 ### בית
-https://-ea0a7bce.zappy5.app
+https://example.com
 אבי בן דוד, עורך דין מומלץ לענייני משפחה, כאן בשבילך בכל שלב. מגירושים ומשמורת ועד צוואות ויפויי כוח מתמשך – פגישה ראשונה עוד היום.
 
 ### שירותים
-https://-ea0a7bce.zappy5.app/services
+https://example.com/services
 מחפשים ליווי משפטי אישי? משירותי גירושים, הפחתת מזונות וייצוג בביטוח לאומי ועד לעריכת צוואות ויפויי כוח מתמשך – בואו נדבר על הפתרון שמתאים לכם.
 
 ### אודות
-https://-ea0a7bce.zappy5.app/about
+https://example.com/about
 אבי בן דוד, עו&quot;ד דיני משפחה, מביא ניסיון עשיר ויחס אישי לכל תיק. הכירו את האיש מאחורי התיקים – ייצוג רגיש, אנושי ומקצועי מול כל הערכאות.
 
 ### מאמרים
-https://-ea0a7bce.zappy5.app/articles
+https://example.com/articles
 רוצים להבין את הזכויות שלכם? מאמרים עדכניים על גירושים, משמורת, הפחתת מזונות וצוואות – הסברים פשוטים וברורים שיעזרו לכם לקבל החלטות נכונות.
 
 ### צור קשר
-https://-ea0a7bce.zappy5.app/contact
+https://example.com/contact
 מוכנים לצעד הבא? השאירו פרטים או לחצו על כפתור הוואטסאפ הצף – אבי בן דוד, עורך דין מומלץ לדיני משפחה, זמין להקשיב, לייעץ וללוות אתכם בכל שלב.
 
 ### תודה שפנית אלינו
-https://-ea0a7bce.zappy5.app/thank-you
+https://example.com/thank-you
 אבי בן דוד, עו"ד - תודה שפנית אלינו
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://-ea0a7bce.zappy5.app/privacy
+https://example.com/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://-ea0a7bce.zappy5.app/terms
+https://example.com/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://-ea0a7bce.zappy5.app/accessibility
+https://example.com/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
@@ -51,8 +51,8 @@ Information about WCAG compliance and accessibility features.
 - (No contact details configured yet.)
 
 ### Contact form
-- URL: https://-ea0a7bce.zappy5.app/contact
-- Endpoint: https://-ea0a7bce.zappy5.app/api/email/contact-form
+- URL: https://example.com/contact
+- Endpoint: https://example.com/api/email/contact-form
 - Method: POST
 - Content-Type: application/json
 - Fields:
@@ -86,6 +86,6 @@ Legal Services
 
 # Machine-readable feeds
 
-- Sitemap (XML): https://-ea0a7bce.zappy5.app/sitemap.xml
-- Robots: https://-ea0a7bce.zappy5.app/robots.txt
-- Flattened page text (for LLMs): https://-ea0a7bce.zappy5.app/llms-full.txt
+- Sitemap (XML): https://example.com/sitemap.xml
+- Robots: https://example.com/robots.txt
+- Flattened page text (for LLMs): https://example.com/llms-full.txt
