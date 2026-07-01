@@ -1,0 +1,91 @@
+# אבי בן דוד, עו"ד — Generative Engine Optimization Map
+
+> A family and personal law attorney offering legal services in family matters, personal status law, representation before the National Insurance Institute, and the Ministry of Defense. The website should have a fresh, modern, and approachable feel — not heavy or overly formal — with a floating WhatsApp contact button, a client testimonials section, and a blog/articles area. The attorney has provided their own logo and personal photos for use on the site.
+
+---
+
+## Pages
+
+### בית
+https://-ea0a7bce.zappy5.app
+אבי בן דוד, עורך דין מומלץ לענייני משפחה, כאן בשבילך בכל שלב. מגירושים ומשמורת ועד צוואות ויפויי כוח מתמשך – פגישה ראשונה עוד היום.
+
+### שירותים
+https://-ea0a7bce.zappy5.app/services
+מחפשים ליווי משפטי אישי? משירותי גירושים, הפחתת מזונות וייצוג בביטוח לאומי ועד לעריכת צוואות ויפויי כוח מתמשך – בואו נדבר על הפתרון שמתאים לכם.
+
+### אודות
+https://-ea0a7bce.zappy5.app/about
+אבי בן דוד, עו&quot;ד דיני משפחה, מביא ניסיון עשיר ויחס אישי לכל תיק. הכירו את האיש מאחורי התיקים – ייצוג רגיש, אנושי ומקצועי מול כל הערכאות.
+
+### מאמרים
+https://-ea0a7bce.zappy5.app/articles
+רוצים להבין את הזכויות שלכם? מאמרים עדכניים על גירושים, משמורת, הפחתת מזונות וצוואות – הסברים פשוטים וברורים שיעזרו לכם לקבל החלטות נכונות.
+
+### צור קשר
+https://-ea0a7bce.zappy5.app/contact
+מוכנים לצעד הבא? השאירו פרטים או לחצו על כפתור הוואטסאפ הצף – אבי בן דוד, עורך דין מומלץ לדיני משפחה, זמין להקשיב, לייעץ וללוות אתכם בכל שלב.
+
+### תודה שפנית אלינו
+https://-ea0a7bce.zappy5.app/thank-you
+אבי בן דוד, עו"ד - תודה שפנית אלינו
+
+## Legal & Policy
+
+### Privacy Policy
+https://-ea0a7bce.zappy5.app/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://-ea0a7bce.zappy5.app/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://-ea0a7bce.zappy5.app/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+## How to Contact Us
+
+- (No contact details configured yet.)
+
+### Contact form
+- URL: https://-ea0a7bce.zappy5.app/contact
+- Endpoint: https://-ea0a7bce.zappy5.app/api/email/contact-form
+- Method: POST
+- Content-Type: application/json
+- Fields:
+  - `name` (text)
+  - `email` (email)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
+
+---
+
+# Business Context (for LLM understanding)
+
+## About אבי בן דוד, עו"ד
+A family and personal law attorney offering legal services in family matters, personal status law, representation before the National Insurance Institute, and the Ministry of Defense. The website should have a fresh, modern, and approachable feel — not heavy or overly formal — with a floating WhatsApp contact button, a client testimonials section, and a blog/articles area. The attorney has provided their own logo and personal photos for use on the site.
+
+## Target Audience
+- אנשים הזקוקים לייצוג משפטי בענייני משפחה, דינים אישיים, ביטוח לאומי ומשרד הביטחון
+- לקוחות דיני משפחה
+- תובעי ביטוח לאומי ונפגעי גוף
+- מקרים מול משרד הביטחון
+- לקוחות ירושה וניהול עיזבון
+- גרושים המחפשים סיוע משפטי
+- ידועים בציבור
+- יפוי כח מתמשך
+
+## Industry
+Legal Services
+
+---
+
+# Machine-readable feeds
+
+- Sitemap (XML): https://-ea0a7bce.zappy5.app/sitemap.xml
+- Robots: https://-ea0a7bce.zappy5.app/robots.txt
+- Flattened page text (for LLMs): https://-ea0a7bce.zappy5.app/llms-full.txt
