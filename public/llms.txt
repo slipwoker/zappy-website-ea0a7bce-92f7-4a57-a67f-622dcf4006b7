@@ -48,7 +48,10 @@ Information about WCAG compliance and accessibility features.
 
 ## How to Contact Us
 
-- (No contact details configured yet.)
+- Email: Avibd@bendavidlaw.co.il
+- Phone: 0544544546
+- Phone (tel): tel:0544544546
+- Address: שדרות ההיסתדרות 66, חיפה, 3296052, Israel
 
 ### Contact form
 - URL: https://example.com/contact
