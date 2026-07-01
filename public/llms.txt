@@ -30,6 +30,12 @@ https://example.com/contact
 https://example.com/thank-you
 אבי בן דוד, עו"ד - תודה שפנית אלינו
 
+### הכנה לייעוץ גירושין: מה חשוב לדעת לפני הפגישה הראשונה
+https://example.com/articles/הכנה-לייעוץ-גירושין-מה-חשוב-לדעת-לפני-הפגישה-הראשונה
+
+### ניווט בהחלטות משפטיות בזמן שינויים משפחתיים: מדריך מעשי
+https://example.com/articles/ניווט-בהחלטות-משפטיות-בזמן-שינויים-משפחתיים-מדריך-מעשי
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -59,11 +65,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
-  - `email` (email, required)
-  - `phone` (tel, required)
-  - `message` (textarea, required)
-  - `privacy_consent` (checkbox, required)
+  - `name` (text)
+  - `email` (email)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
 
 ---
 

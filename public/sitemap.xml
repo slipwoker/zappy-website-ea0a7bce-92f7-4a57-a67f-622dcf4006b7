@@ -37,6 +37,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://example.com/articles/הכנה-לייעוץ-גירושין-מה-חשוב-לדעת-לפני-הפגישה-הראשונה</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://example.com/articles/ניווט-בהחלטות-משפטיות-בזמן-שינויים-משפחתיים-מדריך-מעשי</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://example.com/privacy</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
