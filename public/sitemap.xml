@@ -67,6 +67,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://example.com/articles/מה-כל-משפחה-צריכה-לדעת-על-יפוי-כוח-מתמשך</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://example.com/privacy</loc>
     <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
