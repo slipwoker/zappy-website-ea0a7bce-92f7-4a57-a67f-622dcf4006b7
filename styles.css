@@ -7394,6 +7394,33 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
     padding: 20px 16px;
   }
 }
+
+.index-testimonials-section__reviews-iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.index-testimonials-section__reviews-iframe iframe {
+  width: 100% !important;
+  height: 600px !important;
+}
+
+@media (max-width: 768px) {
+.index-testimonials-section__reviews-iframe iframe {
+  height: 500px !important;
+}
+
+.index-testimonials-section__cta {
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.index-testimonials-section__cta-button {
+  width: 100% !important;
+  text-align: center !important;
+  justify-content: center !important;
+}
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
