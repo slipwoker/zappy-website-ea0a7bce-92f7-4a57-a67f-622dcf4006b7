@@ -73,6 +73,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://example.com/articles/דינים-אישיים-ומעמד-אישי-בישראל-נישואין-גירושין-ידועים-בציבור-ובתי-הדין-הרבניים</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://example.com/privacy</loc>
     <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>

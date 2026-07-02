@@ -1,5 +1,5 @@
 # Clean URL redirects for Render static hosting
-# Generated: 2026-07-02T18:47:37.593Z
+# Generated: 2026-07-02T18:53:10.249Z
 # NOTE: Render uses render.yaml for routing, not _redirects (that is Netlify)
 # This file is kept for reference only
 
@@ -17,6 +17,7 @@
 /articles%2F%D7%98%D7%A2%D7%95%D7%99%D7%95%D7%AA-%D7%A0%D7%A4%D7%95%D7%A6%D7%95%D7%AA-%D7%91%D7%AA%D7%91%D7%99%D7%A2%D7%95%D7%AA-%D7%9E%D7%95%D7%9C-%D7%91%D7%99%D7%98%D7%95%D7%97-%D7%9C%D7%90%D7%95%D7%9E%D7%99-%D7%95%D7%90%D7%99%D7%9A-%D7%9C%D7%94%D7%99%D7%9E%D7%A0%D7%A2-%D7%9E%D7%94%D7%9F  /articles/טעויות-נפוצות-בתביעות-מול-ביטוח-לאומי-ואיך-להימנע-מהן/index.html  200!
 /articles%2F%D7%A0%D7%9B%D7%99-%D7%A6%D7%94%D7%9C-%D7%95%D7%A0%D7%A4%D7%92%D7%A2%D7%99-%D7%A4%D7%A2%D7%95%D7%9C%D7%95%D7%AA-%D7%90%D7%99%D7%91%D7%94-%D7%94%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%9C%D7%94%D7%9B%D7%A8%D7%94-%D7%91%D7%A0%D7%9B%D7%95%D7%AA-%D7%95%D7%9E%D7%99%D7%A6%D7%95%D7%99-%D7%96%D7%9B%D7%95%D7%99%D7%95%D7%AA-%D7%9E%D7%95%D7%9C-%D7%A7%D7%A6%D7%99%D7%9F-%D7%94%D7%AA%D7%92%D7%9E%D7%95%D7%9C%D7%99%D7%9D  /articles/נכי-צהל-ונפגעי-פעולות-איבה-המדריך-להכרה-בנכות-ומיצוי-זכויות-מול-קצין-התגמולים/index.html  200!
 /articles%2F%D7%9E%D7%94-%D7%9B%D7%9C-%D7%9E%D7%A9%D7%A4%D7%97%D7%94-%D7%A6%D7%A8%D7%99%D7%9B%D7%94-%D7%9C%D7%93%D7%A2%D7%AA-%D7%A2%D7%9C-%D7%99%D7%A4%D7%95%D7%99-%D7%9B%D7%95%D7%97-%D7%9E%D7%AA%D7%9E%D7%A9%D7%9A  /articles/מה-כל-משפחה-צריכה-לדעת-על-יפוי-כוח-מתמשך/index.html  200!
+/articles%2F%D7%93%D7%99%D7%A0%D7%99%D7%9D-%D7%90%D7%99%D7%A9%D7%99%D7%99%D7%9D-%D7%95%D7%9E%D7%A2%D7%9E%D7%93-%D7%90%D7%99%D7%A9%D7%99-%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%A0%D7%99%D7%A9%D7%95%D7%90%D7%99%D7%9F-%D7%92%D7%99%D7%A8%D7%95%D7%A9%D7%99%D7%9F-%D7%99%D7%93%D7%95%D7%A2%D7%99%D7%9D-%D7%91%D7%A6%D7%99%D7%91%D7%95%D7%A8-%D7%95%D7%91%D7%AA%D7%99-%D7%94%D7%93%D7%99%D7%9F-%D7%94%D7%A8%D7%91%D7%A0%D7%99%D7%99%D7%9D  /articles/דינים-אישיים-ומעמד-אישי-בישראל-נישואין-גירושין-ידועים-בציבור-ובתי-הדין-הרבניים/index.html  200!
 
 # Legal pages - redirect old .html URLs to friendly URLs
 /privacy.html  /privacy  301
