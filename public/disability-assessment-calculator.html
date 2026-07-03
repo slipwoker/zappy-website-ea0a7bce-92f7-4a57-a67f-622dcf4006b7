@@ -907,7 +907,78 @@
       </section>
 
 <section id="layout-1783059300216" class="layout-section" data-zappy-component="true" style="width: 100%; padding: 60px 0; direction: rtl;" data-component-id="empty-section">
-  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;"><iframe src="https://agent-697798c94e1e3c0072d--diasbilitycalc-b38052.netlify.app/" style="width:100%;height:900px;border:none;display:block;" title="מחשבון הערכת נכות" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe></div>
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;"><div style="max-width:600px;margin:0 auto;direction:rtl;text-align:right;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+  <h2 style="text-align:center;color:#11124A;margin-bottom:24px;font-size:28px;font-weight:bold;">מחשבון נכות משוקללת</h2>
+  <p style="text-align:center;color:#4a4a6a;margin-bottom:28px;font-size:16px;">הזינו עד 5 אחוזי נכות (0–100) לקבלת הנכות המשוקללת</p>
+  <div id="calc-inputs" style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <label style="min-width:80px;font-weight:600;color:#11124A;">אחוז נכות 1</label>
+      <input type="number" min="0" max="100" placeholder="0-100" style="flex:1;padding:12px 16px;border:1px solid #d0d0d0;border-radius:8px;font-size:16px;text-align:center;background:#fff;color:#11124A;">
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <label style="min-width:80px;font-weight:600;color:#11124A;">אחוז נכות 2</label>
+      <input type="number" min="0" max="100" placeholder="0-100" style="flex:1;padding:12px 16px;border:1px solid #d0d0d0;border-radius:8px;font-size:16px;text-align:center;background:#fff;color:#11124A;">
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <label style="min-width:80px;font-weight:600;color:#11124A;">אחוז נכות 3</label>
+      <input type="number" min="0" max="100" placeholder="0-100" style="flex:1;padding:12px 16px;border:1px solid #d0d0d0;border-radius:8px;font-size:16px;text-align:center;background:#fff;color:#11124A;">
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <label style="min-width:80px;font-weight:600;color:#11124A;">אחוז נכות 4</label>
+      <input type="number" min="0" max="100" placeholder="0-100" style="flex:1;padding:12px 16px;border:1px solid #d0d0d0;border-radius:8px;font-size:16px;text-align:center;background:#fff;color:#11124A;">
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <label style="min-width:80px;font-weight:600;color:#11124A;">אחוז נכות 5</label>
+      <input type="number" min="0" max="100" placeholder="0-100" style="flex:1;padding:12px 16px;border:1px solid #d0d0d0;border-radius:8px;font-size:16px;text-align:center;background:#fff;color:#11124A;">
+    </div>
+  </div>
+  <button id="calc-btn" style="display:block;width:100%;padding:14px;background:#11124A;color:#fff;border:none;border-radius:8px;font-size:18px;font-weight:bold;cursor:pointer;transition:background 0.3s;">חשב</button>
+  <div id="calc-result" style="text-align:center;margin-top:24px;display:none;">
+    <div style="font-size:20px;font-weight:bold;color:#11124A;margin-bottom:8px;">הנכות המשוקללת:</div>
+    <div id="calc-percentage" style="font-size:48px;font-weight:bold;color:#11124A;"></div>
+    <p style="color:#6b7280;font-size:14px;margin-top:16px;line-height:1.6;">החישוב להמחשה בלבד ואינו מהווה ייעוץ משפטי או קביעה רפואית; דרגת הנכות נקבעת על ידי הוועדה הרפואית בלבד.</p>
+    <a href="/contact" style="display:inline-block;margin-top:16px;padding:12px 28px;background:#11124A;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:background 0.3s;">לבדיקת זכאותך – צרו קשר</a>
+  </div>
+</div>
+<script>
+(function() {
+  var inputs = document.querySelectorAll('#calc-inputs input');
+  var btn = document.getElementById('calc-btn');
+  var result = document.getElementById('calc-result');
+  var percentage = document.getElementById('calc-percentage');
+
+  function calcCombinedDisability(percents) {
+    var sorted = percents.filter(function(v) { return v > 0; }).sort(function(a, b) { return b - a; });
+    if (sorted.length === 0) return 0;
+    var combined = sorted[0];
+    for (var i = 1; i < sorted.length; i++) {
+      var remaining = 100 - combined;
+      combined = combined + (sorted[i] * remaining) / 100;
+    }
+    return Math.round(combined);
+  }
+
+  btn.addEventListener('click', function() {
+    var values = [];
+    for (var i = 0; i < inputs.length; i++) {
+      var v = parseFloat(inputs[i].value);
+      if (!isNaN(v) && v >= 0 && v <= 100) {
+        values.push(v);
+      }
+    }
+    if (values.length === 0) {
+      alert('נא להזין לפחות אחוז נכות אחד');
+      return;
+    }
+    var resultVal = calcCombinedDisability(values);
+    percentage.textContent = resultVal + '%';
+    result.style.display = 'block';
+  });
+
+  btn.addEventListener('mouseenter', function() { this.style.background = '#1a1b6e'; });
+  btn.addEventListener('mouseleave', function() { this.style.background = '#11124A'; });
+})();
+</script></div>
 </section>
 
 
