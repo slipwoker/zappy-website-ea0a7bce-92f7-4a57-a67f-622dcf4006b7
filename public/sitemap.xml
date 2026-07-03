@@ -103,6 +103,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://example.com/articles/הדרך-לשיקום-וביטחון-המדריך-המלא-למימוש-זכויותיך-מול-אגף-השיקום</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://example.com/privacy</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
