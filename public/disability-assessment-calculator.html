@@ -933,18 +933,19 @@
     </div>
   </div>
   <button id="calc-btn" style="display:block;width:100%;padding:14px;background:#11124A;color:#fff;border:none;border-radius:8px;font-size:18px;font-weight:bold;cursor:pointer;transition:background 0.3s;">חשב</button>
-  <div id="calc-result" style="text-align:center;margin-top:24px;display:none;">
+  <div id="calc-result" style="text-align:center;margin-top:24px;">
     <div style="font-size:20px;font-weight:bold;color:#11124A;margin-bottom:8px;">הנכות המשוקללת:</div>
-    <div id="calc-percentage" style="font-size:48px;font-weight:bold;color:#11124A;"></div>
-    <p style="color:#6b7280;font-size:14px;margin-top:16px;line-height:1.6;">החישוב להמחשה בלבד ואינו מהווה ייעוץ משפטי או קביעה רפואית; דרגת הנכות נקבעת על ידי הוועדה הרפואית בלבד.</p>
-    <a href="/contact" style="display:inline-block;margin-top:16px;padding:12px 28px;background:#11124A;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:background 0.3s;">לבדיקת זכאותך – צרו קשר</a>
+    <div id="calc-percentage" style="font-size:48px;font-weight:bold;color:#11124A;">—</div>
+  </div>
+  <p style="color:#6b7280;font-size:14px;margin-top:24px;line-height:1.6;text-align:center;">החישוב להמחשה בלבד ואינו מהווה ייעוץ משפטי או קביעה רפואית; דרגת הנכות נקבעת על ידי הוועדה הרפואית בלבד.</p>
+  <div style="text-align:center;margin-top:16px;">
+    <a href="/contact" style="display:inline-block;padding:12px 28px;background:#11124A;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:background 0.3s;">לבדיקת זכאותך – צרו קשר</a>
   </div>
 </div>
 <script>
 (function() {
   var inputs = document.querySelectorAll('#calc-inputs input');
   var btn = document.getElementById('calc-btn');
-  var result = document.getElementById('calc-result');
   var percentage = document.getElementById('calc-percentage');
 
   function calcCombinedDisability(percents) {
@@ -972,7 +973,6 @@
     }
     var resultVal = calcCombinedDisability(values);
     percentage.textContent = resultVal + '%';
-    result.style.display = 'block';
   });
 
   btn.addEventListener('mouseenter', function() { this.style.background = '#1a1b6e'; });
