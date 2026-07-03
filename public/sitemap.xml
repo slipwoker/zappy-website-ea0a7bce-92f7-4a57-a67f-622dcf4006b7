@@ -85,6 +85,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://example.com/articles/הכנה-לוועדה-רפואית-במשרד-הביטחון-רגע-האמת-של-התביעה</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://example.com/privacy</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
