@@ -1388,58 +1388,78 @@ window.onload = function() {
     }
 })();
 
-/* ZAPPY_CUSTOM_JS_START:9342c8fe57f8 */
+/* ZAPPY_CUSTOM_JS_START:d994b6f8c8a5 */
 (function () {
   function __zappyCustomInit() {
     try {
-// Auto-filter articles by category from URL query parameter
 (function() {
-  var params = new URLSearchParams(window.location.search);
-  var category = params.get('category');
+  var hash = window.location.hash;
+  if (!hash || hash === '#') return;
+
+  var hashToCategory = {
+    '#דיני-משפחה': 'דיני משפחה',
+    '#דינים-אישיים': 'דינים אישיים',
+    '#תביעות-נכי-צהל-ביטוח-לאומי': 'תביעות נכי צה\"ל/ביטוח לאומי'
+  };
+
+  var category = hashToCategory[hash];
   if (!category) return;
 
-  var decodedCategory = decodeURIComponent(category);
-
-  function init() {
-    // Find filter bar and buttons
-    var filterBar = document.querySelector('.articles-filter-bar');
-    if (!filterBar) return;
-
-    var buttons = filterBar.querySelectorAll('.articles-filter-btn');
-
-    // Deactivate all buttons first
-    buttons.forEach(function(btn) {
-      btn.classList.remove('active');
-    });
-
-    // Find and activate the matching filter button
-    buttons.forEach(function(btn) {
-      var btnFilter = btn.getAttribute('data-filter');
-      if (btnFilter === decodedCategory) {
-        btn.classList.add('active');
+  function applyFilter() {
+    // Update filter buttons
+    var bar = document.querySelector('.articles-filter-bar');
+    if (bar) {
+      var btns = bar.querySelectorAll('.articles-filter-btn');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.remove('active');
+        if (btns[i].getAttribute('data-filter') === category) {
+          btns[i].classList.add('active');
+        }
       }
-    });
+    }
 
-    // Filter the article cards
-    var grid = document.querySelector('.articles-article-grid-section__grid');
-    if (!grid) return;
-
-    var cards = grid.querySelectorAll('.articles-article-grid-section__card');
-    cards.forEach(function(card) {
-      var cardCategory = card.getAttribute('data-category');
-      if (cardCategory === decodedCategory) {
-        card.style.display = '';
+    // Filter cards
+    var cards = document.querySelectorAll('.articles-article-grid-section__card');
+    for (var j = 0; j < cards.length; j++) {
+      var cardCat = cards[j].getAttribute('data-category');
+      if (cardCat === category) {
+        cards[j].style.display = '';
       } else {
-        card.style.display = 'none';
+        cards[j].style.display = 'none';
       }
-    });
+    }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    applyFilter();
   } else {
-    init();
+    document.addEventListener('DOMContentLoaded', applyFilter);
   }
+
+  // Also handle hash changes (if user clicks filter button manually, update hash)
+  window.addEventListener('hashchange', function() {
+    var h = window.location.hash;
+    var cat = hashToCategory[h];
+    if (cat) {
+      applyFilter();
+    } else if (h === '' || h === '#') {
+      // Show all
+      var bar2 = document.querySelector('.articles-filter-bar');
+      if (bar2) {
+        var btns2 = bar2.querySelectorAll('.articles-filter-btn');
+        for (var k = 0; k < btns2.length; k++) {
+          btns2[k].classList.remove('active');
+          if (btns2[k].getAttribute('data-filter') === 'all') {
+            btns2[k].classList.add('active');
+          }
+        }
+      }
+      var cards2 = document.querySelectorAll('.articles-article-grid-section__card');
+      for (var m = 0; m < cards2.length; m++) {
+        cards2[m].style.display = '';
+      }
+    }
+  });
 })();
     } catch (e) {
       if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
@@ -1451,7 +1471,7 @@ window.onload = function() {
     __zappyCustomInit();
   }
 })();
-/* ZAPPY_CUSTOM_JS_END:9342c8fe57f8 */
+/* ZAPPY_CUSTOM_JS_END:d994b6f8c8a5 */
 
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
