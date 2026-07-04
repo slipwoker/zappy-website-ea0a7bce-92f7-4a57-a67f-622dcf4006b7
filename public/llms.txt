@@ -27,9 +27,6 @@ https://example.com/thank-you
 אבי בן דוד, עו"ד - תודה שפנית אלינו
 
 ### Page
-https://example.com/articles/הכנה-לייעוץ-גירושין-מה-חשוב-לדעת-לפני-הפגישה-הראשונה
-
-### Page
 https://example.com/articles/ניווט-בהחלטות-משפטיות-בזמן-שינויים-משפחתיים-מדריך-מעשי
 
 ### Page
@@ -80,6 +77,9 @@ https://example.com/disability-assessment-calculator
 
 ### Page
 https://example.com/family-law-articles
+
+### Page
+https://example.com/articles/הכנה-לייעוץ-גירושין-מה-חשוב-לדעת-לפני-הפגישה-הראשונה
 
 ### Page
 https://example.com/personal-status-law-articles

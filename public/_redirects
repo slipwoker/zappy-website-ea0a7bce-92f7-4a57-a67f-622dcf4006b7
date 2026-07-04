@@ -1,5 +1,5 @@
 # Clean URL redirects for Render static hosting
-# Generated: 2026-07-04T09:48:48.398Z
+# Generated: 2026-07-04T09:49:24.690Z
 # NOTE: Render uses render.yaml for routing, not _redirects (that is Netlify)
 # This file is kept for reference only
 
@@ -10,7 +10,6 @@
 /accessibility  /accessibility.html  200!
 /terms  /terms.html  200!
 /thank-you  /thank-you.html  200!
-/articles%2F%D7%94%D7%9B%D7%A0%D7%94-%D7%9C%D7%99%D7%99%D7%A2%D7%95%D7%A5-%D7%92%D7%99%D7%A8%D7%95%D7%A9%D7%99%D7%9F-%D7%9E%D7%94-%D7%97%D7%A9%D7%95%D7%91-%D7%9C%D7%93%D7%A2%D7%AA-%D7%9C%D7%A4%D7%A0%D7%99-%D7%94%D7%A4%D7%92%D7%99%D7%A9%D7%94-%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%A0%D7%94  /articles/הכנה-לייעוץ-גירושין-מה-חשוב-לדעת-לפני-הפגישה-הראשונה/index.html  200!
 /articles%2F%D7%A0%D7%99%D7%95%D7%95%D7%98-%D7%91%D7%94%D7%97%D7%9C%D7%98%D7%95%D7%AA-%D7%9E%D7%A9%D7%A4%D7%98%D7%99%D7%95%D7%AA-%D7%91%D7%96%D7%9E%D7%9F-%D7%A9%D7%99%D7%A0%D7%95%D7%99%D7%99%D7%9D-%D7%9E%D7%A9%D7%A4%D7%97%D7%AA%D7%99%D7%99%D7%9D-%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%9E%D7%A2%D7%A9%D7%99  /articles/ניווט-בהחלטות-משפטיות-בזמן-שינויים-משפחתיים-מדריך-מעשי/index.html  200!
 /poa-guide  /poa-guide.html  200!
 /articles%2F%D7%9E%D7%94-%D7%9B%D7%9C-%D7%9E%D7%A9%D7%A4%D7%97%D7%94-%D7%A6%D7%A8%D7%99%D7%9B%D7%94-%D7%9C%D7%93%D7%A2%D7%AA-%D7%A2%D7%9C-%D7%99%D7%A4%D7%95%D7%99-%D7%9B%D7%95%D7%97-%D7%9E%D7%AA%D7%9E%D7%A9%D7%9A  /articles/מה-כל-משפחה-צריכה-לדעת-על-יפוי-כוח-מתמשך/index.html  200!
@@ -25,6 +24,7 @@
 /articles%2F%D7%94%D7%93%D7%A8%D7%9A-%D7%9C%D7%A9%D7%99%D7%A7%D7%95%D7%9D-%D7%95%D7%91%D7%99%D7%98%D7%97%D7%95%D7%9F-%D7%94%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%94%D7%9E%D7%9C%D7%90-%D7%9C%D7%9E%D7%99%D7%9E%D7%95%D7%A9-%D7%96%D7%9B%D7%95%D7%99%D7%95%D7%AA%D7%99%D7%9A-%D7%9E%D7%95%D7%9C-%D7%90%D7%92%D7%A3-%D7%94%D7%A9%D7%99%D7%A7%D7%95%D7%9D  /articles/הדרך-לשיקום-וביטחון-המדריך-המלא-למימוש-זכויותיך-מול-אגף-השיקום/index.html  200!
 /disability-assessment-calculator  /disability-assessment-calculator.html  200!
 /family-law-articles  /family-law-articles.html  200!
+/articles%2F%D7%94%D7%9B%D7%A0%D7%94-%D7%9C%D7%99%D7%99%D7%A2%D7%95%D7%A5-%D7%92%D7%99%D7%A8%D7%95%D7%A9%D7%99%D7%9F-%D7%9E%D7%94-%D7%97%D7%A9%D7%95%D7%91-%D7%9C%D7%93%D7%A2%D7%AA-%D7%9C%D7%A4%D7%A0%D7%99-%D7%94%D7%A4%D7%92%D7%99%D7%A9%D7%94-%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%A0%D7%94  /articles/הכנה-לייעוץ-גירושין-מה-חשוב-לדעת-לפני-הפגישה-הראשונה/index.html  200!
 /personal-status-law-articles  /personal-status-law-articles.html  200!
 /mamrym-bnvsha-nky-tshl-vbytvch-lavmy  /mamrym-bnvsha-nky-tshl-vbytvch-lavmy.html  200!
 /contact  /contact.html  200!
