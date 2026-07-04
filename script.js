@@ -1388,53 +1388,46 @@ window.onload = function() {
     }
 })();
 
-/* ZAPPY_CUSTOM_JS_START:928c0d673786 */
+/* ZAPPY_CUSTOM_JS_START:9342c8fe57f8 */
 (function () {
   function __zappyCustomInit() {
     try {
 // Auto-filter articles by category from URL query parameter
 (function() {
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get('category');
+  var params = new URLSearchParams(window.location.search);
+  var category = params.get('category');
   if (!category) return;
 
-  // Decode the category name
-  const decodedCategory = decodeURIComponent(category);
+  var decodedCategory = decodeURIComponent(category);
 
-  // Wait for DOM to be ready
   function init() {
-    const filterBar = document.querySelector('.articles-filter-bar');
+    // Find filter bar and buttons
+    var filterBar = document.querySelector('.articles-filter-bar');
     if (!filterBar) return;
 
-    // Find and activate the matching filter button
-    const buttons = filterBar.querySelectorAll('.articles-filter-btn');
-    let matchedButton = null;
+    var buttons = filterBar.querySelectorAll('.articles-filter-btn');
 
+    // Deactivate all buttons first
     buttons.forEach(function(btn) {
-      // Remove active from all
       btn.classList.remove('active');
+    });
 
-      // Check if the button's data-filter matches our category
-      const btnFilter = btn.getAttribute('data-filter');
+    // Find and activate the matching filter button
+    buttons.forEach(function(btn) {
+      var btnFilter = btn.getAttribute('data-filter');
       if (btnFilter === decodedCategory) {
-        matchedButton = btn;
+        btn.classList.add('active');
       }
     });
 
-    if (matchedButton) {
-      matchedButton.classList.add('active');
-    }
-
-    // Now filter the grid
-    const grid = document.querySelector('.articles-article-grid-section__grid');
+    // Filter the article cards
+    var grid = document.querySelector('.articles-article-grid-section__grid');
     if (!grid) return;
 
-    const cards = grid.querySelectorAll('.articles-article-grid-section__card');
+    var cards = grid.querySelectorAll('.articles-article-grid-section__card');
     cards.forEach(function(card) {
-      const cardCategory = card.getAttribute('data-category');
-      if (decodedCategory === 'all' || !decodedCategory) {
-        card.style.display = '';
-      } else if (cardCategory === decodedCategory) {
+      var cardCategory = card.getAttribute('data-category');
+      if (cardCategory === decodedCategory) {
         card.style.display = '';
       } else {
         card.style.display = 'none';
@@ -1458,7 +1451,7 @@ window.onload = function() {
     __zappyCustomInit();
   }
 })();
-/* ZAPPY_CUSTOM_JS_END:928c0d673786 */
+/* ZAPPY_CUSTOM_JS_END:9342c8fe57f8 */
 
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
