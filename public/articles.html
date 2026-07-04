@@ -843,7 +843,24 @@
 <section class="articles-article-grid-section" data-layout-spec="מאמרים-article-grid">
   <div class="articles-article-grid-section__container">
     <!-- כפתורי סינון לפי נושאים -->
-    <div class="articles-filter-bar" dir="rtl">
+    <script>
+(function(){
+  var h = window.location.hash;
+  var map = {'#דיני-משפחה':'דיני משפחה','#דינים-אישיים':'דינים אישיים','#תביעות-נכי-צהל-ביטוח-לאומי':'תביעות נכי צה"ל/ביטוח לאומי'};
+  var cat = map[h] || '';
+  if (cat) {
+    document.documentElement.style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function(){
+      var btns = document.querySelectorAll('.articles-filter-btn');
+      btns.forEach(function(b){ b.classList.remove('active'); if(b.getAttribute('data-filter')===cat) b.classList.add('active'); });
+      var cards = document.querySelectorAll('.articles-article-grid-section__card');
+      cards.forEach(function(c){ c.style.display = c.getAttribute('data-category')===cat ? '' : 'none'; });
+      document.documentElement.style.display = '';
+    });
+  }
+})();
+</script>
+<div class="articles-filter-bar" dir="rtl">
       <button class="articles-filter-btn active" data-filter="all">הכל</button>
       <button class="articles-filter-btn" data-filter="דיני משפחה">דיני משפחה</button>
       <button class="articles-filter-btn" data-filter="דינים אישיים">דינים אישיים</button>
