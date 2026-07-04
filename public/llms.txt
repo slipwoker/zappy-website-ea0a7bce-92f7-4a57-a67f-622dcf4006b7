@@ -85,6 +85,9 @@ https://example.com/contact
 ### Page
 https://example.com/family-law-articles
 
+### Page
+https://example.com/personal-status-law-articles
+
 ## Legal & Policy
 
 ### Privacy Policy
