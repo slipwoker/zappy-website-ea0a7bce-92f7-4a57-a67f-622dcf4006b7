@@ -1514,6 +1514,63 @@ window.onload = function() {
 })();
 /* ZAPPY_CUSTOM_JS_END:fce94704c410 */
 
+/* ZAPPY_CUSTOM_JS_START:c3fee1cadb11 */
+(function () {
+  function __zappyCustomInit() {
+    try {
+(function() {
+  // Intercept category links in nav sub-menu to set localStorage before navigation
+  var subMenuLinks = document.querySelectorAll('.nav-menu .sub-menu a');
+  subMenuLinks.forEach(function(link) {
+    var text = link.textContent.trim();
+    if (text === 'דיני משפחה') {
+      link.addEventListener('click', function(e) {
+        localStorage.setItem('articlesCategory', 'דיני משפחה');
+      });
+    } else if (text === 'דינים אישיים') {
+      link.addEventListener('click', function(e) {
+        localStorage.setItem('articlesCategory', 'דינים אישיים');
+      });
+    } else if (text === 'תביעות נכי צה"ל/ביטוח לאומי') {
+      link.addEventListener('click', function(e) {
+        localStorage.setItem('articlesCategory', 'תביעות נכי צה"ל/ביטוח לאומי');
+      });
+    }
+  });
+
+  // On /articles page, read localStorage and apply filter
+  if (window.location.pathname === '/articles' || window.location.pathname.startsWith('/articles')) {
+    var cat = localStorage.getItem('articlesCategory');
+    if (cat) {
+      localStorage.removeItem('articlesCategory');
+      function applyFilter() {
+        var btns = document.querySelectorAll('.articles-filter-btn');
+        var cards = document.querySelectorAll('.articles-article-grid-section__card');
+        if (!cards.length) { setTimeout(applyFilter, 50); return; }
+        btns.forEach(function(b) {
+          b.classList.remove('active');
+          if (b.getAttribute('data-filter') === cat) b.classList.add('active');
+        });
+        cards.forEach(function(c) {
+          c.style.display = c.getAttribute('data-category') === cat ? '' : 'none';
+        });
+      }
+      applyFilter();
+    }
+  }
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:c3fee1cadb11 */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){
