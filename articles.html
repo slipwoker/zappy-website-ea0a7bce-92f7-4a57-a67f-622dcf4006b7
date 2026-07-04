@@ -845,18 +845,27 @@
     <!-- כפתורי סינון לפי נושאים -->
     <script>
 (function(){
-  var h = window.location.hash;
-  var map = {'#דיני-משפחה':'דיני משפחה','#דינים-אישיים':'דינים אישיים','#תביעות-נכי-צהל-ביטוח-לאומי':'תביעות נכי צה"ל/ביטוח לאומי'};
-  var cat = map[h] || '';
+  // Support both ?category= and #hash
+  var cat = '';
+  var params = new URLSearchParams(window.location.search);
+  var qp = params.get('category');
+  if (qp) {
+    cat = decodeURIComponent(qp);
+  } else {
+    var h = window.location.hash;
+    var map = {'#דיני-משפחה':'דיני משפחה','#דינים-אישיים':'דינים אישיים','#תביעות-נכי-צהל-ביטוח-לאומי':'תביעות נכי צה"ל/ביטוח לאומי'};
+    cat = map[h] || '';
+  }
   if (cat) {
-    document.documentElement.style.display = 'none';
-    document.addEventListener('DOMContentLoaded', function(){
+    (function filterNow(){
       var btns = document.querySelectorAll('.articles-filter-btn');
-      btns.forEach(function(b){ b.classList.remove('active'); if(b.getAttribute('data-filter')===cat) b.classList.add('active'); });
       var cards = document.querySelectorAll('.articles-article-grid-section__card');
+      if (!cards.length) { setTimeout(filterNow, 50); return; }
+      document.documentElement.style.display = 'none';
+      btns.forEach(function(b){ b.classList.remove('active'); if(b.getAttribute('data-filter')===cat) b.classList.add('active'); });
       cards.forEach(function(c){ c.style.display = c.getAttribute('data-category')===cat ? '' : 'none'; });
       document.documentElement.style.display = '';
-    });
+    })();
   }
 })();
 </script>
