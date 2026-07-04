@@ -1473,6 +1473,70 @@ window.onload = function() {
 })();
 /* ZAPPY_CUSTOM_JS_END:d994b6f8c8a5 */
 
+/* ZAPPY_CUSTOM_JS_START:3517640ae2f2 */
+(function () {
+  function __zappyCustomInit() {
+    try {
+// Auto-filter articles by category from URL query parameter
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var category = params.get('category');
+  if (!category) return;
+
+  // Decode the category name
+  var decodedCategory = decodeURIComponent(category);
+
+  // Map query param categories to the exact data-filter values used in the page
+  // These must match the data-filter attributes on the filter buttons and data-category on cards
+  var filterValue = decodedCategory;
+
+  function applyFilter() {
+    // Find and activate the matching filter button
+    var filterBar = document.querySelector('.articles-filter-bar');
+    var grid = document.querySelector('.articles-article-grid-section__grid');
+    if (!grid) return;
+
+    // Deactivate all buttons, activate the matching one
+    if (filterBar) {
+      var buttons = filterBar.querySelectorAll('.articles-filter-btn');
+      buttons.forEach(function(btn) {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-filter') === filterValue) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    // Filter the cards
+    var cards = grid.querySelectorAll('.articles-article-grid-section__card');
+    cards.forEach(function(card) {
+      var cardCategory = card.getAttribute('data-category');
+      if (filterValue === 'all' || cardCategory === filterValue) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyFilter);
+  } else {
+    applyFilter();
+  }
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:3517640ae2f2 */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){
