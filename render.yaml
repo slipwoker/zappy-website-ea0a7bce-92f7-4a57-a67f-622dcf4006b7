@@ -1,5 +1,5 @@
 # Render static site routing configuration
-# Generated: 2026-07-04T10:23:21.686Z
+# Generated: 2026-07-04T10:29:27.348Z
 # This file configures URL rewrite rules for SPA routing
 
 # Routes are applied when no static file exists at the requested path
