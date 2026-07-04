@@ -845,18 +845,21 @@
     <!-- כפתורי סינון לפי נושאים -->
     <script>
 (function(){
-  // Support both ?category= and #hash
-  var cat = '';
-  var params = new URLSearchParams(window.location.search);
-  var qp = params.get('category');
-  if (qp) {
-    cat = decodeURIComponent(qp);
-  } else {
-    var h = window.location.hash;
-    var map = {'#דיני-משפחה':'דיני משפחה','#דינים-אישיים':'דינים אישיים','#תביעות-נכי-צהל-ביטוח-לאומי':'תביעות נכי צה"ל/ביטוח לאומי'};
-    cat = map[h] || '';
+  // Support sessionStorage, ?category= and #hash
+  var cat = sessionStorage.getItem('articlesCategory');
+  if (!cat) {
+    var params = new URLSearchParams(window.location.search);
+    var qp = params.get('category');
+    if (qp) {
+      cat = decodeURIComponent(qp);
+    } else {
+      var h = window.location.hash;
+      var map = {'#דיני-משפחה':'דיני משפחה','#דינים-אישיים':'דינים אישיים','#תביעות-נכי-צהל-ביטוח-לאומי':'תביעות נכי צה"ל/ביטוח לאומי'};
+      cat = map[h] || '';
+    }
   }
   if (cat) {
+    sessionStorage.removeItem('articlesCategory');
     (function filterNow(){
       var btns = document.querySelectorAll('.articles-filter-btn');
       var cards = document.querySelectorAll('.articles-article-grid-section__card');
