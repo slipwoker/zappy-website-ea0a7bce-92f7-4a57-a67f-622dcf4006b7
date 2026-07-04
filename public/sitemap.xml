@@ -97,13 +97,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/articles/הדרך-לשיקום-וביטחון-המדריך-המלא-למימוש-זכויותיך-מול-אגף-השיקום</loc>
+    <loc>https://example.com/articles/שקיפות-הגינות-וייצוג-נכי-צהל</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/articles/שקיפות-הגינות-וייצוג-נכי-צהל</loc>
+    <loc>https://example.com/articles/הדרך-לשיקום-וביטחון-המדריך-המלא-למימוש-זכויותיך-מול-אגף-השיקום</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -112,12 +112,6 @@
     <loc>https://example.com/disability-assessment-calculator</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://example.com/contact</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -136,6 +130,12 @@
     <loc>https://example.com/mamrym-bnvsha-nky-tshl-vbytvch-lavmy</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://example.com/contact</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
