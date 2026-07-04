@@ -79,12 +79,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/articles/לתבוע-את-אגף-השיקום-לבד-או-עם-עוד-והאם-להמתין-למימון-המדינה</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://example.com/articles/זכויות-הורים-לחיילים-שנפצעו-בשירות</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -128,6 +122,12 @@
   </url>
   <url>
     <loc>https://example.com/mamrym-bnvsha-nky-tshl-vbytvch-lavmy</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://example.com/articles/לתבוע-את-אגף-השיקום-לבד-או-עם-עוד-והאם-להמתין-למימון-המדינה</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

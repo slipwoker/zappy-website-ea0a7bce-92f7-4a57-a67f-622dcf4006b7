@@ -1,5 +1,5 @@
 # Clean URL redirects for Render static hosting
-# Generated: 2026-07-04T09:49:24.690Z
+# Generated: 2026-07-04T09:50:15.648Z
 # NOTE: Render uses render.yaml for routing, not _redirects (that is Netlify)
 # This file is kept for reference only
 
@@ -18,7 +18,6 @@
 /articles%2F%D7%93%D7%99%D7%A0%D7%99%D7%9D-%D7%90%D7%99%D7%A9%D7%99%D7%99%D7%9D-%D7%95%D7%9E%D7%A2%D7%9E%D7%93-%D7%90%D7%99%D7%A9%D7%99-%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%A0%D7%99%D7%A9%D7%95%D7%90%D7%99%D7%9F-%D7%92%D7%99%D7%A8%D7%95%D7%A9%D7%99%D7%9F-%D7%99%D7%93%D7%95%D7%A2%D7%99%D7%9D-%D7%91%D7%A6%D7%99%D7%91%D7%95%D7%A8-%D7%95%D7%91%D7%AA%D7%99-%D7%94%D7%93%D7%99%D7%9F-%D7%94%D7%A8%D7%91%D7%A0%D7%99%D7%99%D7%9D  /articles/דינים-אישיים-ומעמד-אישי-בישראל-נישואין-גירושין-ידועים-בציבור-ובתי-הדין-הרבניים/index.html  200!
 /articles%2F%D7%A4%D7%95%D7%A1%D7%98-%D7%98%D7%A8%D7%90%D7%95%D7%9E%D7%94-%D7%91%D7%97%D7%A8%D7%91%D7%95%D7%AA-%D7%91%D7%A8%D7%96%D7%9C-%D7%94%D7%A4%D7%A6%D7%99%D7%A2%D7%94-%D7%94%D7%A9%D7%A7%D7%95%D7%A4%D7%94-%D7%A9%D7%9E%D7%97%D7%99%D7%99%D7%91%D7%AA-%D7%94%D7%9B%D7%A8%D7%94  /articles/פוסט-טראומה-בחרבות-ברזל-הפציעה-השקופה-שמחייבת-הכרה/index.html  200!
 /articles%2F%D7%94%D7%9B%D7%A0%D7%94-%D7%9C%D7%95%D7%95%D7%A2%D7%93%D7%94-%D7%A8%D7%A4%D7%95%D7%90%D7%99%D7%AA-%D7%91%D7%9E%D7%A9%D7%A8%D7%93-%D7%94%D7%91%D7%99%D7%98%D7%97%D7%95%D7%9F-%D7%A8%D7%92%D7%A2-%D7%94%D7%90%D7%9E%D7%AA-%D7%A9%D7%9C-%D7%94%D7%AA%D7%91%D7%99%D7%A2%D7%94  /articles/הכנה-לוועדה-רפואית-במשרד-הביטחון-רגע-האמת-של-התביעה/index.html  200!
-/articles%2F%D7%9C%D7%AA%D7%91%D7%95%D7%A2-%D7%90%D7%AA-%D7%90%D7%92%D7%A3-%D7%94%D7%A9%D7%99%D7%A7%D7%95%D7%9D-%D7%9C%D7%91%D7%93-%D7%90%D7%95-%D7%A2%D7%9D-%D7%A2%D7%95%D7%93-%D7%95%D7%94%D7%90%D7%9D-%D7%9C%D7%94%D7%9E%D7%AA%D7%99%D7%9F-%D7%9C%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%94%D7%9E%D7%93%D7%99%D7%A0%D7%94  /articles/לתבוע-את-אגף-השיקום-לבד-או-עם-עוד-והאם-להמתין-למימון-המדינה/index.html  200!
 /articles%2F%D7%96%D7%9B%D7%95%D7%99%D7%95%D7%AA-%D7%94%D7%95%D7%A8%D7%99%D7%9D-%D7%9C%D7%97%D7%99%D7%99%D7%9C%D7%99%D7%9D-%D7%A9%D7%A0%D7%A4%D7%A6%D7%A2%D7%95-%D7%91%D7%A9%D7%99%D7%A8%D7%95%D7%AA  /articles/זכויות-הורים-לחיילים-שנפצעו-בשירות/index.html  200!
 /articles%2F%D7%A9%D7%A7%D7%99%D7%A4%D7%95%D7%AA-%D7%94%D7%92%D7%99%D7%A0%D7%95%D7%AA-%D7%95%D7%99%D7%99%D7%A6%D7%95%D7%92-%D7%A0%D7%9B%D7%99-%D7%A6%D7%94%D7%9C  /articles/שקיפות-הגינות-וייצוג-נכי-צהל/index.html  200!
 /articles%2F%D7%94%D7%93%D7%A8%D7%9A-%D7%9C%D7%A9%D7%99%D7%A7%D7%95%D7%9D-%D7%95%D7%91%D7%99%D7%98%D7%97%D7%95%D7%9F-%D7%94%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%94%D7%9E%D7%9C%D7%90-%D7%9C%D7%9E%D7%99%D7%9E%D7%95%D7%A9-%D7%96%D7%9B%D7%95%D7%99%D7%95%D7%AA%D7%99%D7%9A-%D7%9E%D7%95%D7%9C-%D7%90%D7%92%D7%A3-%D7%94%D7%A9%D7%99%D7%A7%D7%95%D7%9D  /articles/הדרך-לשיקום-וביטחון-המדריך-המלא-למימוש-זכויותיך-מול-אגף-השיקום/index.html  200!
@@ -27,6 +26,7 @@
 /articles%2F%D7%94%D7%9B%D7%A0%D7%94-%D7%9C%D7%99%D7%99%D7%A2%D7%95%D7%A5-%D7%92%D7%99%D7%A8%D7%95%D7%A9%D7%99%D7%9F-%D7%9E%D7%94-%D7%97%D7%A9%D7%95%D7%91-%D7%9C%D7%93%D7%A2%D7%AA-%D7%9C%D7%A4%D7%A0%D7%99-%D7%94%D7%A4%D7%92%D7%99%D7%A9%D7%94-%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%A0%D7%94  /articles/הכנה-לייעוץ-גירושין-מה-חשוב-לדעת-לפני-הפגישה-הראשונה/index.html  200!
 /personal-status-law-articles  /personal-status-law-articles.html  200!
 /mamrym-bnvsha-nky-tshl-vbytvch-lavmy  /mamrym-bnvsha-nky-tshl-vbytvch-lavmy.html  200!
+/articles%2F%D7%9C%D7%AA%D7%91%D7%95%D7%A2-%D7%90%D7%AA-%D7%90%D7%92%D7%A3-%D7%94%D7%A9%D7%99%D7%A7%D7%95%D7%9D-%D7%9C%D7%91%D7%93-%D7%90%D7%95-%D7%A2%D7%9D-%D7%A2%D7%95%D7%93-%D7%95%D7%94%D7%90%D7%9D-%D7%9C%D7%94%D7%9E%D7%AA%D7%99%D7%9F-%D7%9C%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%94%D7%9E%D7%93%D7%99%D7%A0%D7%94  /articles/לתבוע-את-אגף-השיקום-לבד-או-עם-עוד-והאם-להמתין-למימון-המדינה/index.html  200!
 /contact  /contact.html  200!
 
 # Legal pages - redirect old .html URLs to friendly URLs
