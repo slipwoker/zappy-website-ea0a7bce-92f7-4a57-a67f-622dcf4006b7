@@ -43,19 +43,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/articles/מה-כל-משפחה-צריכה-לדעת-על-יפוי-כוח-מתמשך</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://example.com/articles/טעויות-נפוצות-בתביעות-מול-ביטוח-לאומי-ואיך-להימנע-מהן</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://example.com/articles/נכי-צהל-ונפגעי-פעולות-איבה-המדריך-להכרה-בנכות-ומיצוי-זכויות-מול-קצין-התגמולים</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
