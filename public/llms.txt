@@ -45,8 +45,8 @@ https://example.com/mamrym-bnvsha-nky-tshl-vbytvch-lavmy
 https://example.com/contact
 מוכנים לצעד הבא? השאירו פרטים או לחצו על כפתור הוואטסאפ הצף – אבי בן דוד, עורך דין מומלץ לדיני משפחה, זמין להקשיב, לייעץ וללוות אתכם בכל שלב.
 
-### Page
-https://example.com/new-page1
+### גירושין – המדריך השלם להליך, זכויות וחובות
+https://example.com/articles/גירושין-המדריך-השלם-להליך-זכויות-וחובות
 
 ## Legal & Policy
 
@@ -80,7 +80,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email, required)
   - `phone` (tel, required)
-  - `message` (textarea)
+  - `message` (textarea, required)
   - `privacy_consent` (checkbox, required)
 
 ---
