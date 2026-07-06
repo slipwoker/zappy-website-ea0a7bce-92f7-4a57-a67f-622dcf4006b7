@@ -43,12 +43,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/articles/טעויות-נפוצות-בתביעות-מול-ביטוח-לאומי-ואיך-להימנע-מהן</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://example.com/articles/דינים-אישיים-ומעמד-אישי-בישראל-נישואין-גירושין-ידועים-בציבור-ובתי-הדין-הרבניים</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -56,12 +50,6 @@
   </url>
   <url>
     <loc>https://example.com/articles/פוסט-טראומה-בחרבות-ברזל-הפציעה-השקופה-שמחייבת-הכרה</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://example.com/articles/הכנה-לוועדה-רפואית-במשרד-הביטחון-רגע-האמת-של-התביעה</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
