@@ -29,10 +29,6 @@ https://example.com/thank-you
 ### Page
 https://example.com/poa-guide
 
-### הדרך לשיקום וביטחון: המדריך המלא למימוש זכויותיך מול אגף השיקום
-https://example.com/articles/הדרך-לשיקום-וביטחון-המדריך-המלא-למימוש-זכויותיך-מול-אגף-השיקום
-אבי בן דוד, עו"ד - הדרך לשיקום וביטחון: המדריך המלא למימוש זכויותיך מול אגף השיקום
-
 ### Page
 https://example.com/disability-assessment-calculator
 
