@@ -7731,6 +7731,10 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
     font-size: 0.95rem;
   }
 }
+
+.articles-article-grid-section {
+  padding-top: 120px !important;
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
