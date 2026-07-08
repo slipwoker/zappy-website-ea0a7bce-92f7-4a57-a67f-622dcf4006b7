@@ -7,40 +7,40 @@
 ## Pages
 
 ### עו&quot;ד משפחה שתמיד לצידך — אבי בן דוד, עו&quot;ד
-https://avi-ben-david-law-office.zappy5.app
+https://bendavidlaw.co.il
 אבי בן דוד, עורך דין מומלץ לענייני משפחה, כאן בשבילך בכל שלב. מגירושים ומשמורת ועד צוואות ויפויי כוח מתמשך – פגישה ראשונה עוד היום.
 
 ### מגירושים ועד צוואה: כל השירותים תחת קורת גג אחת — אבי בן דוד, עו&quot;ד
-https://avi-ben-david-law-office.zappy5.app/services
+https://bendavidlaw.co.il/services
 מחפשים ליווי משפטי אישי? משירותי גירושים, הפחתת מזונות וייצוג בביטוח לאומי ועד לעריכת צוואות ויפויי כוח מתמשך – בואו נדבר על הפתרון שמתאים לכם.
 
 ### עורך דין עם לב, לא רק חליפה — אבי בן דוד, עו&quot;ד
-https://avi-ben-david-law-office.zappy5.app/about
+https://bendavidlaw.co.il/about
 אבי בן דוד, עו&quot;ד דיני משפחה, מביא ניסיון עשיר ויחס אישי לכל תיק. הכירו את האיש מאחורי התיקים – ייצוג רגיש, אנושי ומקצועי מול כל הערכאות.
 
 ### תודה שפנית אלינו
-https://avi-ben-david-law-office.zappy5.app/thank-you
+https://bendavidlaw.co.il/thank-you
 אבי בן דוד, עו"ד - תודה שפנית אלינו
 
 ### Page
-https://avi-ben-david-law-office.zappy5.app/poa-guide
+https://bendavidlaw.co.il/poa-guide
 
 ### לא צריך להתמודד לבד — דברו איתי עוד היום — אבי בן דוד, עו&quot;ד
-https://avi-ben-david-law-office.zappy5.app/contact
+https://bendavidlaw.co.il/contact
 מוכנים לצעד הבא? השאירו פרטים או לחצו על כפתור הוואטסאפ הצף – אבי בן דוד, עורך דין מומלץ לדיני משפחה, זמין להקשיב, לייעץ וללוות אתכם בכל שלב.
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://avi-ben-david-law-office.zappy5.app/privacy
+https://bendavidlaw.co.il/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://avi-ben-david-law-office.zappy5.app/terms
+https://bendavidlaw.co.il/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://avi-ben-david-law-office.zappy5.app/accessibility
+https://bendavidlaw.co.il/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
@@ -53,8 +53,8 @@ Information about WCAG compliance and accessibility features.
 - Address: שדרות ההסתדרות 66, חיפה, 3296052, Israel
 
 ### Contact form
-- URL: https://avi-ben-david-law-office.zappy5.app/contact
-- Endpoint: https://avi-ben-david-law-office.zappy5.app/api/email/contact-form
+- URL: https://bendavidlaw.co.il/contact
+- Endpoint: https://bendavidlaw.co.il/api/email/contact-form
 - Method: POST
 - Content-Type: application/json
 - Fields:
@@ -88,6 +88,6 @@ Legal Services
 
 # Machine-readable feeds
 
-- Sitemap (XML): https://avi-ben-david-law-office.zappy5.app/sitemap.xml
-- Robots: https://avi-ben-david-law-office.zappy5.app/robots.txt
-- Flattened page text (for LLMs): https://avi-ben-david-law-office.zappy5.app/llms-full.txt
+- Sitemap (XML): https://bendavidlaw.co.il/sitemap.xml
+- Robots: https://bendavidlaw.co.il/robots.txt
+- Flattened page text (for LLMs): https://bendavidlaw.co.il/llms-full.txt
