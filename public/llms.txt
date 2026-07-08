@@ -18,10 +18,6 @@ https://example.com/services
 https://example.com/about
 אבי בן דוד, עו&quot;ד דיני משפחה, מביא ניסיון עשיר ויחס אישי לכל תיק. הכירו את האיש מאחורי התיקים – ייצוג רגיש, אנושי ומקצועי מול כל הערכאות.
 
-### משמורת, מזונות ומה שביניהם: המדריך המשפטי שלך — אבי בן דוד, עו&quot;ד
-https://example.com/articles
-רוצים להבין את הזכויות שלכם? מאמרים עדכניים על גירושים, משמורת, הפחתת מזונות וצוואות – הסברים פשוטים וברורים שיעזרו לכם לקבל החלטות נכונות.
-
 ### תודה שפנית אלינו
 https://example.com/thank-you
 אבי בן דוד, עו"ד - תודה שפנית אלינו
@@ -32,29 +28,9 @@ https://example.com/poa-guide
 ### Page
 https://example.com/disability-assessment-calculator
 
-### Page
-https://example.com/family-law-articles
-
-### Page
-https://example.com/personal-status-law-articles
-
-### Page
-https://example.com/mamrym-bnvsha-nky-tshl-vbytvch-lavmy
-
 ### לא צריך להתמודד לבד — דברו איתי עוד היום — אבי בן דוד, עו&quot;ד
 https://example.com/contact
 מוכנים לצעד הבא? השאירו פרטים או לחצו על כפתור הוואטסאפ הצף – אבי בן דוד, עורך דין מומלץ לדיני משפחה, זמין להקשיב, לייעץ וללוות אתכם בכל שלב.
-
-### גירושין – המדריך השלם להליך, זכויות וחובות
-https://example.com/articles/גירושין-המדריך-השלם-להליך-זכויות-וחובות
-
-### פוסט טראומה
-https://example.com/articles/פוסט-טראומה-בחרבות-ברזל-הפציעה-השקופה-שמחייבת-הכרה-2026
-אבי בן דוד, עו"ד - פוסט טראומה בחרבות ברזל: הפציעה השקופה שמחייבת הכרה
-
-### ועדה רפואית
-https://example.com/articles/הכנה-לוועדה-רפואית-רגע-האמת-של-התביעה-2026
-אבי בן דוד, עו"ד - הכנה לוועדה רפואית: רגע האמת של התביעה
 
 ## Legal & Policy
 
@@ -85,11 +61,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text)
-  - `email` (email)
-  - `phone` (tel)
+  - `name` (text, required)
+  - `email` (email, required)
+  - `phone` (tel, required)
   - `message` (textarea)
-  - `privacy_consent` (checkbox)
+  - `privacy_consent` (checkbox, required)
 
 ---
 
