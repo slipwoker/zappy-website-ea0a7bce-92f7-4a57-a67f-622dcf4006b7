@@ -7735,6 +7735,17 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .articles-article-grid-section {
   padding-top: 120px !important;
 }
+
+.index-testimonials-section__grid {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.index-testimonials-section__reviews-iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
