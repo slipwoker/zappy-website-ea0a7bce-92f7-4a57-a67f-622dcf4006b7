@@ -7,40 +7,40 @@
 ## Pages
 
 ### עו&quot;ד משפחה שתמיד לצידך — אבי בן דוד, עו&quot;ד
-https://example.com
+https://avi-ben-david-law-office.zappy5.app
 אבי בן דוד, עורך דין מומלץ לענייני משפחה, כאן בשבילך בכל שלב. מגירושים ומשמורת ועד צוואות ויפויי כוח מתמשך – פגישה ראשונה עוד היום.
 
 ### מגירושים ועד צוואה: כל השירותים תחת קורת גג אחת — אבי בן דוד, עו&quot;ד
-https://example.com/services
+https://avi-ben-david-law-office.zappy5.app/services
 מחפשים ליווי משפטי אישי? משירותי גירושים, הפחתת מזונות וייצוג בביטוח לאומי ועד לעריכת צוואות ויפויי כוח מתמשך – בואו נדבר על הפתרון שמתאים לכם.
 
 ### עורך דין עם לב, לא רק חליפה — אבי בן דוד, עו&quot;ד
-https://example.com/about
+https://avi-ben-david-law-office.zappy5.app/about
 אבי בן דוד, עו&quot;ד דיני משפחה, מביא ניסיון עשיר ויחס אישי לכל תיק. הכירו את האיש מאחורי התיקים – ייצוג רגיש, אנושי ומקצועי מול כל הערכאות.
 
 ### תודה שפנית אלינו
-https://example.com/thank-you
+https://avi-ben-david-law-office.zappy5.app/thank-you
 אבי בן דוד, עו"ד - תודה שפנית אלינו
 
 ### Page
-https://example.com/poa-guide
+https://avi-ben-david-law-office.zappy5.app/poa-guide
 
 ### לא צריך להתמודד לבד — דברו איתי עוד היום — אבי בן דוד, עו&quot;ד
-https://example.com/contact
+https://avi-ben-david-law-office.zappy5.app/contact
 מוכנים לצעד הבא? השאירו פרטים או לחצו על כפתור הוואטסאפ הצף – אבי בן דוד, עורך דין מומלץ לדיני משפחה, זמין להקשיב, לייעץ וללוות אתכם בכל שלב.
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://avi-ben-david-law-office.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://avi-ben-david-law-office.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://avi-ben-david-law-office.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
@@ -53,8 +53,8 @@ Information about WCAG compliance and accessibility features.
 - Address: שדרות ההסתדרות 66, חיפה, 3296052, Israel
 
 ### Contact form
-- URL: https://example.com/contact
-- Endpoint: https://example.com/api/email/contact-form
+- URL: https://avi-ben-david-law-office.zappy5.app/contact
+- Endpoint: https://avi-ben-david-law-office.zappy5.app/api/email/contact-form
 - Method: POST
 - Content-Type: application/json
 - Fields:
@@ -88,6 +88,6 @@ Legal Services
 
 # Machine-readable feeds
 
-- Sitemap (XML): https://example.com/sitemap.xml
-- Robots: https://example.com/robots.txt
-- Flattened page text (for LLMs): https://example.com/llms-full.txt
+- Sitemap (XML): https://avi-ben-david-law-office.zappy5.app/sitemap.xml
+- Robots: https://avi-ben-david-law-office.zappy5.app/robots.txt
+- Flattened page text (for LLMs): https://avi-ben-david-law-office.zappy5.app/llms-full.txt
