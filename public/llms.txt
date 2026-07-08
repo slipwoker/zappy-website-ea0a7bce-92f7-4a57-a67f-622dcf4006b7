@@ -48,6 +48,10 @@ https://example.com/contact
 ### גירושין – המדריך השלם להליך, זכויות וחובות
 https://example.com/articles/גירושין-המדריך-השלם-להליך-זכויות-וחובות
 
+### פוסט טראומה
+https://example.com/articles/פוסט-טראומה-בחרבות-ברזל-הפציעה-השקופה-שמחייבת-הכרה-2026
+אבי בן דוד, עו"ד - פוסט טראומה בחרבות ברזל: הפציעה השקופה שמחייבת הכרה
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -77,11 +81,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
-  - `email` (email, required)
-  - `phone` (tel, required)
-  - `message` (textarea, required)
-  - `privacy_consent` (checkbox, required)
+  - `name` (text)
+  - `email` (email)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
 
 ---
 
