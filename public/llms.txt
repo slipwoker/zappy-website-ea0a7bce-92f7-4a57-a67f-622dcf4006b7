@@ -49,6 +49,9 @@ https://bendavidlaw.co.il/blog/יפוי-כוח-מתמשך
 https://bendavidlaw.co.il/blog/נפגעי-שירות-משרד-הביטחון
 מדריך ראשוני לנפגעי שירות המבקשים הכרה מול משרד הביטחון, עם דגש על תיעוד, קשר סיבתי והיערכות נכונה.
 
+### Page
+https://bendavidlaw.co.il/new-page-1783696535705
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -78,11 +81,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
-  - `email` (email, required)
-  - `phone` (tel, required)
-  - `message` (textarea, required)
-  - `privacy_consent` (checkbox, required)
+  - `name` (text)
+  - `email` (email)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
 
 ---
 
