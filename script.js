@@ -3824,7 +3824,7 @@ function fixContrast(){
       window.initVariantSelection = function(product, t) {
         // Store product data for our fix
         if (product && product.variants && product.variants.length > 0) {
-          _variantProduct = product;
+          _variantProduct = _augmentProductFromCardVariants(product);
           var trans = t || {};
           // Ensure pleaseSelect is available (for sites generated before this key was added)
           if (!trans.pleaseSelect) {
@@ -3857,6 +3857,131 @@ function fixContrast(){
     function _getVariants() {
       if (!_variantProduct) return [];
       return (_variantProduct.variants || []).filter(function(v) { return v.is_active !== false; });
+    }
+
+    function _augmentProductFromCardVariants(product) {
+      if (!product || !product.card_variants || !Array.isArray(product.card_variants.matrix)) return product;
+      var byId = {};
+      (Array.isArray(product.variants) ? product.variants : []).forEach(function(v) {
+        if (v && v.id != null) byId[String(v.id)] = v;
+      });
+      product.card_variants.matrix.forEach(function(row) {
+        if (!row || row.id == null) return;
+        var existing = byId[String(row.id)] || {};
+        byId[String(row.id)] = Object.assign({}, existing, {
+          id: row.id,
+          attributes: row.attributes || existing.attributes || {},
+          price: row.price != null ? row.price : existing.price,
+          image: row.image || existing.image,
+          sku: row.sku || existing.sku,
+          custom_fields: existing.custom_fields || existing.customFields || row.custom_fields || row.customFields || {},
+          available: typeof row.available === 'boolean' ? row.available : existing.available,
+          is_active: existing.is_active !== false
+        });
+      });
+      product.variants = Object.keys(byId).map(function(id) { return byId[id]; });
+      return product;
+    }
+
+    function _variantCssUrl(value) {
+      return String(value == null ? '' : value).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n|\r/g, '');
+    }
+
+    function _cardVariantSwatchStyle(value) {
+      if (typeof window.zappyCardSwatchStyle === 'function') return window.zappyCardSwatchStyle(value);
+      if (value && (value.swatchImage || value.image)) {
+        var resolver = window.resolveProductImageUrl || function(src) { return src; };
+        return "background-image:url('" + _variantCssUrl(resolver(value.swatchImage || value.image)) + "');background-size:" + (value.imageSize || 'cover') + ';background-position:' + (value.imagePosition || '50% 50%') + ';';
+      }
+      if (value && value.hex2) return 'background:linear-gradient(90deg,' + (value.hex || '#94a3b8') + ' 0 50%,' + value.hex2 + ' 50% 100%);';
+      return 'background:' + ((value && (value.hex || value.value)) || '#94a3b8') + ';';
+    }
+
+    function _translateVariantOptionLabel(product, key, value, fallback) {
+      if (typeof window.zappyTranslateVariantValue === 'function') {
+        return window.zappyTranslateVariantValue(product, key, value, fallback);
+      }
+      var lang = '';
+      try {
+        lang = String((typeof getCurrentEcomLanguage === 'function' ? getCurrentEcomLanguage() : (document.documentElement.lang || '')) || '').split('-')[0].toLowerCase();
+      } catch (e) {}
+      function translateKnownColor(rawValue) {
+        if (lang !== 'he') return '';
+        if (String(key || '').toLowerCase().indexOf('color') === -1 && String(key || '').toLowerCase() !== 'colour') return '';
+        var raw = String(rawValue == null ? '' : rawValue).trim();
+        if (!raw || /[\u0590-\u05FF]/.test(raw)) return '';
+        var map = { black:'שחור', white:'לבן', gray:'אפור', grey:'אפור', red:'אדום', green:'ירוק', blue:'כחול', navy:'כחול כהה', pink:'ורוד', purple:'סגול', yellow:'צהוב', orange:'כתום', brown:'חום', beige:'בז׳', gold:'זהב', silver:'כסף', teal:'טורקיז', mint:'מנטה', cream:'קרם', ivory:'שנהב' };
+        var direct = map[raw.toLowerCase().replace(/\s+/g, ' ')];
+        if (direct) return direct;
+        var parts = raw.split(/\s*-\s*/).filter(Boolean);
+        if (parts.length > 1) {
+          var translated = parts.map(function(part) { return map[String(part).toLowerCase().replace(/\s+/g, ' ')]; });
+          if (translated.every(Boolean)) return translated.join('-');
+        }
+        return '';
+      }
+      var wanted = String(value);
+      var variants = product && Array.isArray(product.variants) ? product.variants : [];
+      for (var i = 0; i < variants.length; i++) {
+        var variant = variants[i] || {};
+        var attrs = variant.attributes_source || variant.attributes || {};
+        if (!attrs || String(attrs[key]) !== wanted) continue;
+        var translatedAttrs = variant.attributes_translations && lang && variant.attributes_translations[lang];
+        if (translatedAttrs && translatedAttrs[key]) return translateKnownColor(translatedAttrs[key]) || String(translatedAttrs[key]);
+        var displayAttrs = variant.attributes_display || {};
+        if (displayAttrs && displayAttrs[key]) return translateKnownColor(displayAttrs[key]) || String(displayAttrs[key]);
+      }
+      var matrix = product && product.card_variants && Array.isArray(product.card_variants.matrix) ? product.card_variants.matrix : [];
+      for (var j = 0; j < matrix.length; j++) {
+        var row = matrix[j] || {};
+        var rowAttrs = row.attributes || {};
+        if (rowAttrs && String(rowAttrs[key]) === wanted && row.attributes_display && row.attributes_display[key]) {
+          return translateKnownColor(row.attributes_display[key]) || String(row.attributes_display[key]);
+        }
+      }
+      return translateKnownColor(fallback) || fallback;
+    }
+
+    function _ensureCardVariantOptionButtons() {
+      var product = _variantProduct || window.currentProduct;
+      var cv = product && product.card_variants;
+      if (!cv || !Array.isArray(cv.options)) return;
+      cv.options.forEach(function(option) {
+        if (!option || !option.key || !Array.isArray(option.values)) return;
+        var group = null;
+        document.querySelectorAll('.variant-group').forEach(function(candidate) {
+          if (candidate.getAttribute('data-group') === option.key) group = candidate;
+        });
+        var container = group && group.querySelector('.variant-options');
+        if (!container) return;
+        var isColor = option.type === 'color' || String(option.key).toLowerCase().indexOf('color') !== -1;
+        option.values.forEach(function(entry) {
+          if (!entry || entry.value == null) return;
+          var displayLabel = String(entry.label || entry.value);
+          displayLabel = _translateVariantOptionLabel(product, option.key, entry.value, displayLabel);
+          var existingButton = null;
+          container.querySelectorAll('.variant-option').forEach(function(btn) {
+            if (btn.getAttribute('data-value') === String(entry.value)) existingButton = btn;
+          });
+          if (existingButton) {
+            existingButton.setAttribute('data-display-value', displayLabel);
+            existingButton.title = displayLabel;
+            if (isColor) existingButton.style.cssText = _cardVariantSwatchStyle(entry);
+            else existingButton.textContent = displayLabel;
+            return;
+          }
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'variant-option' + (isColor ? ' color-swatch' : '');
+          btn.setAttribute('data-attr', option.key);
+          btn.setAttribute('data-value', String(entry.value));
+          btn.setAttribute('data-display-value', displayLabel);
+          btn.title = displayLabel;
+          if (isColor) btn.style.cssText = _cardVariantSwatchStyle(entry);
+          else btn.textContent = displayLabel;
+          container.appendChild(btn);
+        });
+      });
     }
     
     function _getAttributeKeys() {
@@ -3919,17 +4044,68 @@ function fixContrast(){
         }
         test[ak] = av;
         var matching = _findMatching(test);
+        var globalMatching = _findMatching((function() { var any = {}; any[ak] = av; return any; })());
         btn.classList.remove('disabled', 'out-of-stock');
         btn.disabled = false;
         if (matching.length === 0) {
           btn.classList.add('disabled');
-          btn.disabled = true;
+          btn.disabled = globalMatching.length === 0;
         } else if (matching.every(function(v) { return _isOOS(v); })) {
           btn.classList.add('disabled');
           btn.classList.add('out-of-stock');
           btn.disabled = true;
         }
       });
+    }
+
+    function _hasAvailableCombination(selections) {
+      return _findMatching(selections).filter(function(v) { return !_isOOS(v); }).length > 0;
+    }
+
+    function _syncSelectedDom() {
+      document.querySelectorAll('.variant-option').forEach(function(btn) {
+        var key = btn.getAttribute('data-attr');
+        var value = btn.getAttribute('data-value');
+        btn.classList.toggle('selected', !!key && selectedAttributes[key] === value);
+      });
+    }
+
+    function _reconcileSelectedAttributes(changedKey) {
+      var keys = _getAttributeKeys();
+      var next = {};
+      if (changedKey && selectedAttributes[changedKey]) {
+        var changedOnly = {};
+        changedOnly[changedKey] = selectedAttributes[changedKey];
+        if (_hasAvailableCombination(changedOnly)) next[changedKey] = selectedAttributes[changedKey];
+      }
+      keys.forEach(function(key) {
+        if (key === changedKey || !selectedAttributes.hasOwnProperty(key)) return;
+        var candidate = Object.assign({}, next);
+        candidate[key] = selectedAttributes[key];
+        if (_hasAvailableCombination(candidate)) next[key] = selectedAttributes[key];
+      });
+      selectedAttributes = next;
+      var guard = 0;
+      var changed = true;
+      while (changed && guard++ < keys.length + 2) {
+        changed = false;
+        keys.forEach(function(key) {
+          if (selectedAttributes.hasOwnProperty(key)) return;
+          var viable = [];
+          document.querySelectorAll('.variant-option[data-attr="' + key + '"]').forEach(function(candidateBtn) {
+            var val = candidateBtn.getAttribute('data-value');
+            if (!val) return;
+            var candidate = Object.assign({}, selectedAttributes);
+            candidate[key] = val;
+            if (_hasAvailableCombination(candidate)) viable.push(candidateBtn);
+          });
+          if (viable.length === 1) {
+            selectedAttributes[key] = viable[0].getAttribute('data-value');
+            changed = true;
+          }
+        });
+      }
+      _syncSelectedDom();
     }
     
     function _updateProductDisplay() {
@@ -4051,6 +4227,9 @@ function fixContrast(){
           } else if (mainImage && window._originalMainImageSrc) {
             mainImage.src = window._originalMainImageSrc;
           }
+          if (typeof updateProductSpecificationsForVariant === 'function') {
+            updateProductSpecificationsForVariant(v, product);
+          }
         }
       } else {
         window.selectedVariant = null;
@@ -4126,6 +4305,9 @@ function fixContrast(){
         if (mainImage && window._originalMainImageSrc) {
           mainImage.src = window._originalMainImageSrc;
         }
+        if (typeof updateProductSpecificationsForVariant === 'function') {
+          updateProductSpecificationsForVariant(null, product);
+        }
       }
     }
     
@@ -4141,7 +4323,7 @@ function fixContrast(){
       var ak = btn.getAttribute('data-attr');
       var av = btn.getAttribute('data-value');
       if (!ak || !av) return;
-      if (btn.disabled || btn.classList.contains('disabled')) return;
+      if (btn.disabled || (btn.classList.contains('disabled') && _findMatching((function() { var any = {}; any[ak] = av; return any; })()).length === 0)) return;
       
       // If already selected, do nothing (no manual deselect)
       if (selectedAttributes[ak] === av) {
@@ -4151,15 +4333,7 @@ function fixContrast(){
       document.querySelectorAll('.variant-option[data-attr="' + ak + '"]').forEach(function(b) { b.classList.remove('selected'); });
       selectedAttributes[ak] = av;
       btn.classList.add('selected');
-      // Non-existent combo check: if the new selection creates an impossible combo, clear all others
-      if (Object.keys(selectedAttributes).length > 1) {
-        if (!_comboExists(selectedAttributes)) {
-          document.querySelectorAll('.variant-option').forEach(function(b) { b.classList.remove('selected'); });
-          selectedAttributes = {};
-          selectedAttributes[ak] = av;
-          btn.classList.add('selected');
-        }
-      }
+      _reconcileSelectedAttributes(ak);
       
       _updateVisuals();
       _updateProductDisplay();
@@ -4222,7 +4396,7 @@ function fixContrast(){
       if (window._zappyVariantFixed) return;
       window._zappyVariantFixed = true;
       
-      _variantProduct = product;
+      _variantProduct = _augmentProductFromCardVariants(product);
       // Ensure pleaseSelect translation exists (for sites generated before this key was added)
       if (!t.pleaseSelect) {
         var isRTL = document.documentElement.getAttribute('dir') === 'rtl' || document.body.getAttribute('dir') === 'rtl';
@@ -4289,6 +4463,7 @@ function fixContrast(){
           });
         });
       }
+      _ensureCardVariantOptionButtons();
       _repairVariantButtons();
 
       // Sort variant options (numeric, then known sizes, then alphabetical)
@@ -4741,16 +4916,31 @@ function fixContrast(){
       var product = window.currentProduct;
       var variants = product && Array.isArray(product.variants) ? product.variants : [];
       var lang = getLang();
+      function translateKnownColor(rawValue) {
+        if (lang !== 'he') return '';
+        if (String(attr || '').toLowerCase().indexOf('color') === -1 && String(attr || '').toLowerCase() !== 'colour') return '';
+        var raw = String(rawValue == null ? '' : rawValue).trim();
+        if (!raw || /[\u0590-\u05FF]/.test(raw)) return '';
+        var map = { black:'שחור', white:'לבן', gray:'אפור', grey:'אפור', red:'אדום', green:'ירוק', blue:'כחול', navy:'כחול כהה', pink:'ורוד', purple:'סגול', yellow:'צהוב', orange:'כתום', brown:'חום', beige:'בז׳', gold:'זהב', silver:'כסף', teal:'טורקיז', mint:'מנטה', cream:'קרם', ivory:'שנהב' };
+        var direct = map[raw.toLowerCase().replace(/\s+/g, ' ')];
+        if (direct) return direct;
+        var parts = raw.split(/\s*-\s*/).filter(Boolean);
+        if (parts.length > 1) {
+          var translated = parts.map(function(part) { return map[String(part).toLowerCase().replace(/\s+/g, ' ')]; });
+          if (translated.every(Boolean)) return translated.join('-');
+        }
+        return '';
+      }
       for (var i = 0; i < variants.length; i++) {
         var variant = variants[i];
         var attrs = variant && (variant.attributes_source || variant.attributes || {});
         if (String(attrs[attr]) !== String(sourceValue)) continue;
         var translatedAttrs = variant.attributes_translations && variant.attributes_translations[lang];
-        if (translatedAttrs && translatedAttrs[attr]) return translatedAttrs[attr];
+        if (translatedAttrs && translatedAttrs[attr]) return translateKnownColor(translatedAttrs[attr]) || translatedAttrs[attr];
         var displayAttrs = variant.attributes_display || {};
-        if (displayAttrs[attr]) return displayAttrs[attr];
+        if (displayAttrs[attr]) return translateKnownColor(displayAttrs[attr]) || displayAttrs[attr];
       }
-      return sourceValue;
+      return translateKnownColor(sourceValue) || sourceValue;
     }
 
     function patchProductDetailI18n() {
@@ -5826,6 +6016,397 @@ function fixContrast(){
     window.addEventListener('load', injectMobileNavIconAlignmentFix);
     setTimeout(injectMobileNavIconAlignmentFix, 250);
     setTimeout(injectMobileNavIconAlignmentFix, 1000);
+  } catch (e) {}
+})();
+
+
+/* ZAPPY_NAV_OVERFLOW_MENU_V1 */
+(function(){
+  try {
+    if (window.__zappyNavOverflowInit) return;
+    window.__zappyNavOverflowInit = true;
+
+    var MORE_LABELS = {en:'More',he:'עוד',es:'Más',fr:'Plus',de:'Mehr',it:'Altro',pt:'Mais',ar:'المزيد',ru:'Ещё',nl:'Meer',pl:'Więcej',tr:'Daha',ja:'その他',zh:'更多',hi:'और',sv:'Mer',uk:'Ще',ro:'Mai mult',cs:'Více',da:'Mere',fi:'Lisää',no:'Mer',el:'Περισσότερα'};
+    var TOL = 2;
+    var mo = null;
+
+    function moreLabel() {
+      var lang = (document.documentElement.getAttribute('lang') || 'en').slice(0,2).toLowerCase();
+      return MORE_LABELS[lang] || 'More';
+    }
+
+    function injectCss() {
+      if (document.getElementById('zappy-nav-overflow-css')) return;
+      var s = document.createElement('style');
+      s.id = 'zappy-nav-overflow-css';
+      s.textContent =
+        '@media (min-width:769px){' +
+          '.zappy-nav-more-item{position:relative!important;flex:0 0 auto!important;}' +
+          '.zappy-nav-more-item>.zappy-nav-more-toggle{cursor:pointer;display:inline-flex!important;align-items:center;gap:6px;white-space:nowrap;}' +
+          '.navbar .zappy-nav-more-item>.sub-menu{display:block!important;left:auto!important;right:0!important;min-width:200px!important;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(6px);transition:opacity .18s ease,visibility .18s ease,transform .18s ease;}' +
+          'html[dir="rtl"] .navbar .zappy-nav-more-item>.sub-menu{left:0!important;right:auto!important;}' +
+          '.navbar .zappy-nav-more-item:hover>.sub-menu,.navbar .zappy-nav-more-item:focus-within>.sub-menu,.navbar .zappy-nav-more-item.open>.sub-menu{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translateY(0)!important;}' +
+          '.zappy-nav-more-item>.sub-menu>li{display:block!important;width:100%!important;flex:0 0 auto!important;}' +
+          /* Mobile-only items (hamburger-overlay contact CTA) must never render
+             inside the desktop More panel — the display:block above would
+             otherwise resurrect them there (duplicate CTA bug, 2026-07). */
+          '.zappy-nav-more-item>.sub-menu>li.mobile-contact-link,.zappy-nav-more-item>.sub-menu>li.nav-cta-mobile-item,.zappy-nav-more-item>.sub-menu>li.mobile-only{display:none!important;}' +
+          '.zappy-nav-more-item>.sub-menu>li>a{display:block!important;white-space:nowrap!important;padding:10px 16px!important;}' +
+          '.zappy-nav-more-item .sub-menu .sub-menu{position:static!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;box-shadow:none!important;min-width:0!important;padding-inline-start:12px!important;}' +
+          '.zappy-nav-more-item>.sub-menu>li>a .dropdown-arrow,.zappy-nav-more-item>.sub-menu .mobile-submenu-toggle{display:none!important;}' +
+        '}' +
+        '@media (max-width:768px){.zappy-nav-more-item{display:none!important;}}';
+      (document.head || document.documentElement).appendChild(s);
+    }
+
+    function getMenu() {
+      return document.querySelector('.nav-container > .nav-menu, .nav-right-group > .nav-menu')
+        || document.getElementById('navMenu')
+        || document.querySelector('.nav-menu');
+    }
+
+    // Visual extent (px) of just the IN-FLOW top-level <li> items — the true
+    // width the menu's content needs. Measured from the left-most item edge to
+    // the right-most item edge so the REAL gaps are captured by geometry (never
+    // guessed). Absolutely-positioned dropdown sub-menus (the auto "More" panel,
+    // the Products/Categories dropdowns) are excluded: they hang out of flow yet
+    // still inflate menu.scrollWidth, which was the false signal that drained
+    // almost every item into "More" on a near-empty navbar (bug 2026-06).
+    function inflowItemsExtent(menu) {
+      var left = Infinity, right = -Infinity, found = false, kids = menu.children;
+      for (var i = 0; i < kids.length; i++) {
+        var li = kids[i];
+        if (!li || li.tagName !== 'LI') continue;
+        var pos = '';
+        try { pos = getComputedStyle(li).position; } catch (e) {}
+        if (pos === 'absolute' || pos === 'fixed') continue;
+        var r = li.getBoundingClientRect();
+        if (r.width === 0 && r.height === 0) continue; // skip display:none items
+        if (r.left < left) left = r.left;
+        if (r.right > right) right = r.right;
+        found = true;
+      }
+      return found ? (right - left) : 0;
+    }
+
+    // Drop any width/flex sizing override we previously pinned on the menu so
+    // the next reflow re-measures from the site's natural layout. flex-basis +
+    // flex-grow are cleared alongside width/flex-shrink: many navbars (V2
+    // ecommerce, RTL) ship .nav-menu{flex:1 1 0% important}, and a DEFINITE
+    // flex-basis (0%) makes the width property a no-op for the flex item's
+    // main size (CSS Flexbox spec). Without neutralizing flex-basis/flex-grow
+    // our width pin was silently ignored — the menu kept its flex-distributed
+    // box while its items spilled over the search/cart icons, and the overflow
+    // detector measured the capped box (not the overflowing items) so it never
+    // drained anything into "More" (bug 2026-06, RTL navbars).
+    function clearMenuWidthOverride(menu) {
+      if (!menu) return;
+      menu.style.removeProperty('width');
+      menu.style.removeProperty('flex-shrink');
+      menu.style.removeProperty('flex-basis');
+      menu.style.removeProperty('flex-grow');
+      menu.removeAttribute('data-zappy-nav-fitted');
+    }
+
+    // Force the menu so its inline width actually governs the flex item's main
+    // size, regardless of any flex:1 1 0% the site baked in. Sets flex-shrink:0
+    // (don't compress), flex-grow:0 (don't stretch) and flex-basis:auto (so width
+    // wins). Returns a token array to pass to restoreMenuSizing(). Pass the
+    // desired width (px) or null to only freeze the flex triplet.
+    function forceMenuSizing(menu, widthPx) {
+      var saved = [
+        menu.style.getPropertyValue('width'), menu.style.getPropertyPriority('width'),
+        menu.style.getPropertyValue('flex-shrink'), menu.style.getPropertyPriority('flex-shrink'),
+        menu.style.getPropertyValue('flex-grow'), menu.style.getPropertyPriority('flex-grow'),
+        menu.style.getPropertyValue('flex-basis'), menu.style.getPropertyPriority('flex-basis')
+      ];
+      menu.style.setProperty('flex-shrink', '0', 'important');
+      menu.style.setProperty('flex-grow', '0', 'important');
+      menu.style.setProperty('flex-basis', 'auto', 'important');
+      if (widthPx != null) menu.style.setProperty('width', widthPx + 'px', 'important');
+      return saved;
+    }
+
+    function restoreMenuSizing(menu, saved) {
+      if (saved[0]) menu.style.setProperty('width', saved[0], saved[1]); else menu.style.removeProperty('width');
+      if (saved[2]) menu.style.setProperty('flex-shrink', saved[2], saved[3]); else menu.style.removeProperty('flex-shrink');
+      if (saved[4]) menu.style.setProperty('flex-grow', saved[4], saved[5]); else menu.style.removeProperty('flex-grow');
+      if (saved[6]) menu.style.setProperty('flex-basis', saved[6], saved[7]); else menu.style.removeProperty('flex-basis');
+    }
+
+    // The NATURAL (un-shrunk) content width the menu's in-flow items need. The
+    // menu carries flex-shrink:1 (and often flex:1 1 0%), so on a tight navbar
+    // the browser compresses/expands its box and a plain inflowItemsExtent()
+    // read can under-report. Force the flex triplet (shrink:0, grow:0,
+    // basis:auto) + a huge width so the items lay out at full size, read the
+    // real span (gaps captured by geometry, abs sub-menus excluded), restore.
+    function naturalMenuWidth(menu) {
+      var saved = forceMenuSizing(menu, 100000);
+      var ext = inflowItemsExtent(menu);
+      restoreMenuSizing(menu, saved);
+      return ext;
+    }
+
+    // Would the navbar ROW overflow its container if the menu were sized to
+    // widthPx? This is the authoritative "do the items fit?" test. It is
+    // deliberately NOT based on container.scrollWidth > clientWidth, which is
+    // unreliable here for THREE reasons:
+    //   (a) abs-positioned dropdown sub-menus inflate the menu's own scrollWidth,
+    //   (b) RTL: a flex child overflowing past the container's edge does NOT grow
+    //       the container scrollWidth (measured: menu right=942 over an 817 box,
+    //       scrollWidth still 817) — the original bug that left RTL navbars with
+    //       no "More" and overlapping links, and
+    //   (c) a flexible sibling (the search/cart icon group) silently CRUSHES to
+    //       absorb the overflow, hiding it from scrollWidth entirely.
+    // Instead we pin the menu to widthPx AND freeze every in-flow sibling at
+    // flex-shrink:0 (so none can crush), then measure the geometric UNION SPAN of
+    // all in-flow children (leftmost edge → rightmost edge) and compare it to the
+    // container's content width. This is fully direction-agnostic (LTR + RTL) and
+    // immune to scrollWidth quirks. margin:auto gaps collapse to 0 exactly at
+    // the fit boundary, so a row WITH free space spans ≈ clientWidth (not over)
+    // while a genuinely too-wide row spans past it. Styles restored exactly.
+    //
+    // The MENU must be frozen with the full flex triplet (shrink:0, grow:0,
+    // basis:auto) — not just flex-shrink:0 — so widthPx actually sizes its box.
+    // A navbar that baked .nav-menu{flex:1 1 0%} has a DEFINITE flex-basis,
+    // which makes width a no-op: without this the menu kept its narrow
+    // flex-distributed box, getBoundingClientRect read that capped box (NOT the
+    // overflowing items), the span stayed inside the container, and "More" was
+    // never triggered (bug 2026-06). Siblings keep flex-shrink:0 + natural width.
+    function rowOverflowsAtWidth(menu, widthPx) {
+      var c = menu.parentElement;
+      if (!c) return false;
+      var saved = [];
+      function freezeSibling(el) {
+        saved.push([
+          el,
+          el.style.getPropertyValue('flex-shrink'), el.style.getPropertyPriority('flex-shrink')
+        ]);
+        el.style.setProperty('flex-shrink', '0', 'important');
+      }
+      var kids = c.children, i, ch, pos;
+      var menuSaved = forceMenuSizing(menu, widthPx);
+      for (i = 0; i < kids.length; i++) {
+        ch = kids[i];
+        if (ch === menu) continue;
+        pos = '';
+        try { pos = getComputedStyle(ch).position; } catch (e) {}
+        if (pos === 'absolute' || pos === 'fixed') continue;
+        freezeSibling(ch); // flex-shrink:0 only — keep the sibling's natural width
+      }
+      var left = Infinity, right = -Infinity, b;
+      for (i = 0; i < kids.length; i++) {
+        ch = kids[i];
+        pos = '';
+        try { pos = getComputedStyle(ch).position; } catch (e) {}
+        if (pos === 'absolute' || pos === 'fixed') continue;
+        b = ch.getBoundingClientRect();
+        if (b.width === 0 && b.height === 0) continue;
+        if (b.left < left) left = b.left;
+        if (b.right > right) right = b.right;
+      }
+      var span = (right > left) ? (right - left) : 0;
+      var over = span > c.clientWidth + TOL;
+      for (i = saved.length - 1; i >= 0; i--) {
+        var s = saved[i], el = s[0];
+        if (s[1]) el.style.setProperty('flex-shrink', s[1], s[2]); else el.style.removeProperty('flex-shrink');
+      }
+      restoreMenuSizing(menu, menuSaved);
+      return over;
+    }
+
+    function makeMoreItem() {
+      var li = document.createElement('li');
+      li.className = 'menu-item-has-children zappy-nav-more-item';
+      li.setAttribute('data-zappy-nav-more', '1');
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'zappy-nav-more-toggle nav-link';
+      a.setAttribute('aria-haspopup', 'true');
+      a.setAttribute('aria-expanded', 'false');
+      a.innerHTML = '<span class="zappy-nav-more-label"></span><svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>';
+      a.querySelector('.zappy-nav-more-label').textContent = moreLabel();
+      var ul = document.createElement('ul');
+      ul.className = 'sub-menu zappy-nav-more-menu';
+      ul.setAttribute('role', 'menu');
+      li.appendChild(a);
+      li.appendChild(ul);
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var open = li.classList.toggle('open');
+        a.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      return li;
+    }
+
+    function restore(menu) {
+      var more = menu.querySelector(':scope > .zappy-nav-more-item');
+      if (!more) return;
+      var sub = more.querySelector('.sub-menu');
+      while (sub && sub.firstElementChild) {
+        menu.insertBefore(sub.firstElementChild, more);
+      }
+      more.remove();
+    }
+
+    // Is this anchor href the site home/root? Handles BOTH the preview shape
+    // (.../preview-fullscreen/<id>?page=%2F) and the published shape (/, /index.html,
+    // /en/, etc.), language prefixes and absolute origins included.
+    function isHomeHref(href) {
+      if (!href) return false;
+      href = ('' + href).trim();
+      if (!href || href.charAt(0) === '#') return false;
+      var pIdx = href.indexOf('page=');
+      if (pIdx !== -1) {
+        var val = href.slice(pIdx + 5);
+        var stop = val.search(/[&#]/);
+        if (stop !== -1) val = val.slice(0, stop);
+        try { val = decodeURIComponent(val); } catch (e) {}
+        val = val.replace(/index\.html$/i, '').replace(/^\/[a-z]{2}\/$/i, '/');
+        return val === '/' || val === '';
+      }
+      var clean = href.split('?')[0].split('#')[0].trim();
+      clean = clean.replace(/^https?:\/\/[^/]+/i, '').replace(/^\.\//, '/').replace(/index\.html$/i, '');
+      if (clean === '' || clean === '/') return true;
+      return /^\/[a-z]{2}\/?$/i.test(clean);
+    }
+
+    // The "Home" link must always be the FIRST top-level nav item. The
+    // ecommerce generator injects the auto-built Products dropdown by replacing
+    // the catalog/products link IN PLACE, so when the LLM happened to emit that
+    // link before "Home" the dropdown rendered first (bug 2026-06: "Products,
+    // Home, ..." across e-commerce sites). This deterministically hoists the
+    // Home item back to the front on every reflow — runs before the overflow
+    // pass so Home can never be pushed into "More".
+    function reorderHomeFirst(menu) {
+      var home = menu.querySelector(':scope > li.nav-home-item');
+      if (!home) {
+        var lis = Array.prototype.filter.call(menu.children, function (el) {
+          return el.tagName === 'LI' && !(el.classList && el.classList.contains('zappy-nav-more-item'));
+        });
+        for (var i = 0; i < lis.length; i++) {
+          var a = lis[i].querySelector(':scope > a');
+          if (a && isHomeHref(a.getAttribute('href'))) { home = lis[i]; break; }
+        }
+      }
+      if (home && menu.firstElementChild !== home) {
+        menu.insertBefore(home, menu.firstElementChild);
+      }
+    }
+
+    function reflow() {
+      var menu = getMenu();
+      if (!menu) return;
+      if (mo) mo.disconnect();
+      try {
+        menu.classList.remove('zappy-desktop-wrap');
+        clearMenuWidthOverride(menu);
+        restore(menu);
+        reorderHomeFirst(menu);
+        if (window.innerWidth <= 768) return;
+
+        // Drain trailing items into "More" until the items, AT THEIR NATURAL
+        // CONTENT WIDTH, fit the navbar row. Using the row-fit test (instead of
+        // the menu's own scrollWidth/clientWidth) means we never over-drain on a
+        // navbar that actually has room: the abs-positioned dropdown panels no
+        // longer count, and the flex gap intrinsic-sizing quirk (a content-
+        // sized menu under-reporting its width by the total gap) no longer
+        // matters. "More" is appended last and items leave from the END, so the
+        // maximum number of items stays visible before "More".
+        var more = null, sub = null, guard = 0;
+        while (guard < 200) {
+          guard++;
+          if (!rowOverflowsAtWidth(menu, Math.ceil(naturalMenuWidth(menu)))) break;
+          var reals = Array.prototype.filter.call(menu.children, function(li) {
+            if (li === more || li.tagName !== 'LI') return false;
+            // Never drain mobile-only items (the hamburger-overlay contact CTA
+            // <li class="mobile-contact-link nav-cta-mobile-item">): they are
+            // display:none on desktop and take no row space, but once moved
+            // into the More panel its display:block li rule made them visible,
+            // duplicating the navbar CTA inside "More" (bug 2026-07).
+            if (li.classList && (li.classList.contains('mobile-contact-link') || li.classList.contains('nav-cta-mobile-item') || li.classList.contains('mobile-only'))) return false;
+            try { if (getComputedStyle(li).display === 'none') return false; } catch (e) {}
+            return true;
+          });
+          if (reals.length <= 1) break;
+          if (!more) {
+            more = makeMoreItem();
+            menu.appendChild(more);
+            sub = more.querySelector('.sub-menu');
+          }
+          sub.insertBefore(reals[reals.length - 1], sub.firstChild);
+        }
+        if (more && sub && !sub.firstElementChild) more.remove();
+
+        // The site's flex gap is excluded from a flex-basis:auto menu's
+        // intrinsic width, so the menu box can be narrower than its items and
+        // they spill over the search/cart icons. Pin the menu to its real
+        // NATURAL content extent (only when it currently under-fits) so every
+        // remaining item is fully visible. We drained until the row fits at this
+        // natural width, so the pin is always safe. Cleared on the next reflow /
+        // resize. Using naturalMenuWidth (not the possibly-shrunk inflow extent)
+        // is what makes this correct on a tight RTL navbar.
+        var ext = naturalMenuWidth(menu);
+        if (ext > menu.clientWidth + TOL) {
+          // forceMenuSizing pins width + neutralizes flex-grow/flex-basis so the
+          // pin holds even under .nav-menu{flex:1 1 0%}. Cleared on next reflow.
+          forceMenuSizing(menu, Math.ceil(ext));
+          menu.setAttribute('data-zappy-nav-fitted', '1');
+        }
+      } finally {
+        observe();
+      }
+    }
+
+    function relabel() {
+      var menu = getMenu();
+      if (!menu) return;
+      var lbl = menu.querySelector('.zappy-nav-more-label');
+      if (lbl) lbl.textContent = moreLabel();
+    }
+
+    var t = null;
+    function schedule() {
+      if (t) clearTimeout(t);
+      t = setTimeout(reflow, 150);
+    }
+
+    function observe() {
+      if (!window.MutationObserver) return;
+      var menu = getMenu();
+      if (!menu) return;
+      if (!mo) mo = new MutationObserver(function() { schedule(); });
+      mo.observe(menu, { childList: true, subtree: true });
+    }
+
+    function init() {
+      injectCss();
+      reflow();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    window.addEventListener('load', function() { injectCss(); reflow(); });
+    window.addEventListener('resize', schedule, { passive: true });
+    window.addEventListener('orientationchange', schedule, { passive: true });
+    window.addEventListener('popstate', function() { setTimeout(reflow, 0); });
+    window.addEventListener('zappy:languageChanged', function() { setTimeout(function() { relabel(); reflow(); }, 0); });
+    window.addEventListener('languageChanged', function() { setTimeout(function() { relabel(); reflow(); }, 0); });
+    document.addEventListener('click', function(e) {
+      var menu = getMenu();
+      if (!menu) return;
+      var more = menu.querySelector(':scope > .zappy-nav-more-item');
+      if (more && more.classList.contains('open') && !more.contains(e.target)) {
+        more.classList.remove('open');
+        var tog = more.querySelector('.zappy-nav-more-toggle');
+        if (tog) tog.setAttribute('aria-expanded', 'false');
+      }
+    }, true);
+    setTimeout(reflow, 300);
+    setTimeout(reflow, 1200);
   } catch (e) {}
 })();
 

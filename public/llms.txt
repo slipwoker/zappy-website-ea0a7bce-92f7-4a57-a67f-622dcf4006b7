@@ -29,6 +29,26 @@ https://bendavidlaw.co.il/poa-guide
 https://bendavidlaw.co.il/contact
 מוכנים לצעד הבא? השאירו פרטים או לחצו על כפתור הוואטסאפ הצף – אבי בן דוד, עורך דין מומלץ לדיני משפחה, זמין להקשיב, לייעץ וללוות אתכם בכל שלב.
 
+### בלוג משפטי | אבי בן דוד, עו״ד
+https://bendavidlaw.co.il/blog
+אבי בן דוד, עו"ד - בלוג משפטי | אבי בן דוד, עו״ד
+
+### ועדה
+https://bendavidlaw.co.il/blog/הכנה-לוועדה-רפואית
+מדריך מעשי להכנה נכונה לוועדה רפואית, כולל ארגון מסמכים, הצגת הפגיעה והימנעות מטעויות נפוצות.
+
+### ביטוח
+https://bendavidlaw.co.il/blog/תביעה-מול-ביטוח-לאומי
+סקירה מעשית של טעויות נפוצות בהגשת תביעות לביטוח לאומי וכיצד ניתן להיערך נכון כבר מהשלב הראשון.
+
+### ייפוי
+https://bendavidlaw.co.il/blog/יפוי-כוח-מתמשך
+הסבר נגיש על ייפוי כוח מתמשך, למי הוא מתאים, מה חשוב לקבוע בו ומדוע כדאי לערוך אותו בזמן.
+
+### שיקום
+https://bendavidlaw.co.il/blog/נפגעי-שירות-משרד-הביטחון
+מדריך ראשוני לנפגעי שירות המבקשים הכרה מול משרד הביטחון, עם דגש על תיעוד, קשר סיבתי והיערכות נכונה.
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -61,7 +81,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email, required)
   - `phone` (tel, required)
-  - `message` (textarea)
+  - `message` (textarea, required)
   - `privacy_consent` (checkbox, required)
 
 ---
