@@ -49,8 +49,9 @@ https://bendavidlaw.co.il/blog/יפוי-כוח-מתמשך
 https://bendavidlaw.co.il/blog/נפגעי-שירות-משרד-הביטחון
 מדריך ראשוני לנפגעי שירות המבקשים הכרה מול משרד הביטחון, עם דגש על תיעוד, קשר סיבתי והיערכות נכונה.
 
-### Page
-https://bendavidlaw.co.il/new-page-1785103137151
+### תפקיד עורך הדין בהליך גירושים
+https://bendavidlaw.co.il/blog/lawyer-role-divorce
+מה תפקידו האמיתי של עורך דין בהליך גירושים? מדוע הסכם עדיף על קרב משפטי, איך שומרים על הילדים, ומה המחיר האמיתי של מלחמה בין כותלי בית המשפט. מאמר מאת אבי בן דוד, עו"ד.
 
 ## Legal & Policy
 
@@ -81,11 +82,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text)
+  - `name` (text, required)
   - `email` (email)
-  - `phone` (tel)
-  - `message` (textarea)
-  - `privacy_consent` (checkbox)
+  - `phone` (tel, required)
+  - `message` (textarea, required)
+  - `privacy_consent` (checkbox, required)
 
 ---
 
