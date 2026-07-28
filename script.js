@@ -1601,6 +1601,20 @@ window.onload = function() {
 /* ZAPPY_CUSTOM_JS_END:5bec5da828f3 */
 
 
+/* Added Component Script */
+(function() {
+  const episodeItems = document.querySelectorAll('.episode-item');
+  episodeItems.forEach(item => {
+    item.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+})();
+
+
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){
   try {
