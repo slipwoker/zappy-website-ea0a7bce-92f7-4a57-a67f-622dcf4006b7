@@ -230,6 +230,9 @@
   var ECOM_MODE = "";
   var IS_CATALOG = false;
   var IS_FULL = false;
+  var DIRECT_GA = false;
+  var DIRECT_META = false;
+  var GA_SEND_TO = "";
 
   var ECOM_ALIAS = {
     begin_checkout: 'checkout_started',
@@ -399,10 +402,14 @@
     return 'zappy_purchase_fired_' + String(orderId || '');
   }
 
+  function purchaseMetaDedupKey(orderId) {
+    return 'zappy_purchase_meta_fired_' + String(orderId || '');
+  }
+
   function alreadyFiredPurchase(orderId) {
     if (!orderId) return false;
     try {
-      return sessionStorage.getItem(purchaseDedupKey(orderId)) === '1';
+      return window.sessionStorage.getItem(purchaseDedupKey(orderId)) === '1';
     } catch (e) {
       return false;
     }
@@ -410,7 +417,78 @@
 
   function markPurchaseFired(orderId) {
     if (!orderId) return;
-    try { sessionStorage.setItem(purchaseDedupKey(orderId), '1'); } catch (e) {}
+    try { window.sessionStorage.setItem(purchaseDedupKey(orderId), '1'); } catch (e) {}
+  }
+
+  function alreadyFiredPurchaseMeta(orderId) {
+    if (!orderId) return false;
+    try {
+      return window.sessionStorage.getItem(purchaseMetaDedupKey(orderId)) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markPurchaseMetaFired(orderId) {
+    if (!orderId) return;
+    try { window.sessionStorage.setItem(purchaseMetaDedupKey(orderId), '1'); } catch (e) {}
+  }
+
+  function getPendingMetaEvents() {
+    try {
+      if (!Array.isArray(window.__zappyPendingMetaEvents)) {
+        window.__zappyPendingMetaEvents = [];
+      }
+      return window.__zappyPendingMetaEvents;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function enqueueMetaEvent(eventName, params, orderId) {
+    var q = getPendingMetaEvents();
+    if (orderId) {
+      for (var i = 0; i < q.length; i++) {
+        if (q[i] && q[i].orderId === orderId && q[i].eventName === eventName) return;
+      }
+    }
+    q.push({ eventName: eventName, params: params || {}, orderId: orderId || null });
+  }
+
+  /**
+   * Live sites replace the eager Meta snippet with a consent-gated lazy
+   * loader. Payment providers bounce the shopper back to /order-success
+   * before CookieConsent hydrates, so confirm-order used to fire Purchase
+   * while window.fbq was still undefined — then sessionStorage blocked a
+   * retry. Queue until fbq exists, then flush.
+   */
+  function flushPendingMetaEvents() {
+    if (typeof window.fbq !== 'function') return;
+    var q = getPendingMetaEvents().slice();
+    try { window.__zappyPendingMetaEvents = []; } catch (e) {}
+    for (var i = 0; i < q.length; i++) {
+      var item = q[i];
+      if (!item || !item.eventName) continue;
+      if (item.orderId && alreadyFiredPurchaseMeta(item.orderId)) continue;
+      try {
+        window.fbq('track', item.eventName, item.params || {});
+        if (item.orderId) markPurchaseMetaFired(item.orderId);
+      } catch (e2) {}
+    }
+  }
+  window.zappyFlushPendingMetaEvents = flushPendingMetaEvents;
+
+  if (DIRECT_META) {
+    var metaFlushAttempts = 0;
+    var metaFlushTimer = setInterval(function() {
+      metaFlushAttempts++;
+      flushPendingMetaEvents();
+      var pendingLen = 0;
+      try { pendingLen = (window.__zappyPendingMetaEvents || []).length; } catch (e) {}
+      if ((pendingLen === 0 && typeof window.fbq === 'function') || metaFlushAttempts > 60) {
+        clearInterval(metaFlushTimer);
+      }
+    }, 500);
   }
 
   /**
@@ -431,15 +509,19 @@
         metadata.pagePath = pagePath();
       }
 
+      var oid = '';
+      var purchaseAlreadySent = false;
+      var purchaseMetaAlreadySent = false;
       if (eventId === 'checkout_complete') {
-        var oid = String(metadata.orderId || metadata.order_id || metadata.transaction_id || '');
-        if (oid && alreadyFiredPurchase(oid)) return;
-        if (oid) markPurchaseFired(oid);
+        oid = String(metadata.orderId || metadata.order_id || metadata.transaction_id || '');
+        purchaseAlreadySent = !!(oid && alreadyFiredPurchase(oid));
+        purchaseMetaAlreadySent = !!(oid && alreadyFiredPurchaseMeta(oid));
+        if (purchaseAlreadySent && purchaseMetaAlreadySent) return;
       }
 
       // First-party (skip when already tracked via zappyTrackEcomAnalytics path
       // that opts out, or when caller already recorded under a different name)
-      if (!opts.skipFirstParty) {
+      if (!opts.skipFirstParty && !purchaseAlreadySent) {
         try {
           if (window.zappyAnalytics && typeof window.zappyAnalytics.track === 'function') {
             window.zappyAnalytics.track(eventId, metadata);
@@ -447,43 +529,79 @@
         } catch (e1) {}
       }
 
-      // GTM / dataLayer — platform-standard ecommerce event names
-      try {
-        window.dataLayer = window.dataLayer || [];
-        if (plat.ecom) {
-          var ga4ForGtm = buildGa4Params(eventId, metadata);
-          var ecommerce = {};
-          if (ga4ForGtm.transaction_id) ecommerce.transaction_id = ga4ForGtm.transaction_id;
-          if (ga4ForGtm.value != null) ecommerce.value = ga4ForGtm.value;
-          if (ga4ForGtm.currency) ecommerce.currency = ga4ForGtm.currency;
-          if (ga4ForGtm.items) ecommerce.items = ga4ForGtm.items;
-          window.dataLayer.push({ event: plat.gtm, ecommerce: ecommerce });
-          // Secondary Zappy-specific trigger for merchants who want it
-          if (eventId === 'checkout_complete' || eventId === 'checkout_started') {
-            window.dataLayer.push({ event: eventId, ecommerce: ecommerce });
+      // GTM / dataLayer — platform-standard ecommerce event names.
+      // Always push. A bare gtag.js snippet ignores plain event objects;
+      // a GTM container is what turns them into GA4/Ads hits.
+      if (!purchaseAlreadySent) {
+        try {
+          window.dataLayer = window.dataLayer || [];
+          if (plat.ecom) {
+            var ga4ForGtm = buildGa4Params(eventId, metadata);
+            var ecommerce = {};
+            if (ga4ForGtm.transaction_id) ecommerce.transaction_id = ga4ForGtm.transaction_id;
+            if (ga4ForGtm.value != null) ecommerce.value = ga4ForGtm.value;
+            if (ga4ForGtm.currency) ecommerce.currency = ga4ForGtm.currency;
+            if (ga4ForGtm.items) ecommerce.items = ga4ForGtm.items;
+            // Clear first so GTM does not merge this hit with the previous ecommerce object.
+            window.dataLayer.push({ ecommerce: null });
+            window.dataLayer.push({ event: plat.gtm, ecommerce: ecommerce });
+            // Secondary Zappy-specific trigger for merchants who want it
+            if (eventId === 'checkout_complete' || eventId === 'checkout_started') {
+              window.dataLayer.push({ ecommerce: null });
+              window.dataLayer.push({ event: eventId, ecommerce: ecommerce });
+            }
+          } else {
+            var dl = { event: plat.gtm };
+            for (var k in metadata) {
+              if (Object.prototype.hasOwnProperty.call(metadata, k)) dl[k] = metadata[k];
+            }
+            window.dataLayer.push(dl);
           }
-        } else {
-          var dl = { event: plat.gtm };
-          for (var k in metadata) {
-            if (Object.prototype.hasOwnProperty.call(metadata, k)) dl[k] = metadata[k];
+        } catch (e2) {}
+
+        // Direct Google Analytics snippet only. GTM also defines window.gtag;
+        // calling it then sends the same event again to every Google tag the
+        // container loaded. send_to keeps a direct GA install off those tags
+        // when the merchant also has GTM.
+        if (DIRECT_GA) {
+          try {
+            if (typeof window.gtag === 'function') {
+              var gaParams = buildGa4Params(eventId, metadata);
+              if (GA_SEND_TO && gaParams && typeof gaParams === 'object') {
+                var gaCopy = {};
+                for (var gk in gaParams) {
+                  if (Object.prototype.hasOwnProperty.call(gaParams, gk)) gaCopy[gk] = gaParams[gk];
+                }
+                gaCopy.send_to = GA_SEND_TO;
+                gaParams = gaCopy;
+              }
+              window.gtag('event', plat.ga4, gaParams);
+            }
+          } catch (e3) {}
+        }
+
+        if (oid) markPurchaseFired(oid);
+      }
+
+      // Meta Pixel — only the Zappy pixel integration. A pixel pasted inside
+      // GTM already initializes fbq; calling it from here would double-count.
+      // Live sites lazy-load fbq after marketing consent. If the stub is not
+      // defined yet, queue and flush when the pixel arrives.
+      if (DIRECT_META) {
+        try {
+          if (purchaseMetaAlreadySent) {
+            // already delivered to Meta
+          } else {
+            var metaParams = buildMetaParams(eventId, metadata);
+            if (typeof window.fbq === 'function') {
+              window.fbq('track', plat.meta, metaParams);
+              if (oid) markPurchaseMetaFired(oid);
+            } else {
+              enqueueMetaEvent(plat.meta, metaParams, eventId === 'checkout_complete' ? oid : null);
+            }
           }
-          window.dataLayer.push(dl);
-        }
-      } catch (e2) {}
-
-      // GA4 gtag
-      try {
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', plat.ga4, buildGa4Params(eventId, metadata));
-        }
-      } catch (e3) {}
-
-      // Meta Pixel (only when fbq is loaded — consent-gated lazy loader)
-      try {
-        if (typeof window.fbq === 'function') {
-          window.fbq('track', plat.meta, buildMetaParams(eventId, metadata));
-        }
-      } catch (e4) {}
+        } catch (e4) {}
+      }
     } catch (err) {}
   };
 
@@ -871,7 +989,7 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
   <div class="nav-container">
     <div class="nav-right-group"><div class="nav-brand">
       <a href="/" class="logo-link"><img class="logo" src="/assets/site-----image-1.webp" alt="אבי בן דוד, עו" ד"="" decoding="async" width="35" height="35"></a>
-    </div><ul class="nav-menu" id="navMenu"><li><a href="/services">שירותים</a></li><li><a href="/about">אודות</a></li><li class="nav-cta-item-mobile"><a href="/contact">צור קשר</a></li><li class="nav-cta-item-mobile"><a href="/poa-guide">מדריך ליפויי כח מתמשך</a></li><li><a href="/blog" class="nav-link">בלוג</a><ul class="sub-menu"><li><a href="/blog/הכנה-לוועדה-רפואית" class="nav-link">הכנה לוועדה רפואית</a></li><li><a href="/blog/תביעה-מול-ביטוח-לאומי" class="nav-link">תביעה מול ביטוח לאומי</a></li><li><a href="/blog/יפוי-כוח-מתמשך" class="nav-link">יפוי כוח מתמשך</a></li><li><a href="/blog/נפגעי-שירות-משרד-הביטחון" class="nav-link">נפגעי שירות משרד הביטחון</a></li><li><a href="/blog/lawyer-role-divorce" class="nav-link">תפקיד עורך הדין בהליך גירושים</a></li><li><a href="/blog/podcast-nechei-tzahal" class="nav-link">פודקאסט</a></li></ul></li></ul></div>
+    </div><ul class="nav-menu" id="navMenu"><li><a href="/services">שירותים</a></li><li><a href="/about">אודות</a></li><li class="nav-cta-item-mobile"><a href="/contact">צור קשר</a></li><li class="nav-cta-item-mobile"><a href="/poa-guide">מדריך ליפויי כח מתמשך</a></li><li><a href="/blog" class="nav-link">בלוג</a><ul class="sub-menu"><li><a href="/blog/הכנה-לוועדה-רפואית" class="nav-link">הכנה לוועדה רפואית</a></li><li><a href="/blog/תביעה-מול-ביטוח-לאומי" class="nav-link">תביעה מול ביטוח לאומי</a></li><li><a href="/blog/יפוי-כוח-מתמשך" class="nav-link">יפוי כוח מתמשך</a></li><li><a href="/blog/נפגעי-שירות-משרד-הביטחון" class="nav-link">נפגעי שירות משרד הביטחון</a></li><li><a href="/blog/lawyer-role-divorce" class="nav-link">תפקיד עורך הדין בהליך גירושים</a></li><li><a href="/blog/podcast-nechei-tzahal" class="nav-link">פודקאסט</a></li><li><a href="/hchvk-lhgblt-shkr-trchh-lnky-tshl-vnpgay-pavlvt-aybh-mh-zh-avmr-abvrk-ad-hyvm-my-shnpga-bshyrvtv-vpnh-lavrk-dyn-la-yda-mrash-kmh-zh-yalh-lv-hyv-my-shgbv-mavt-alpy-shklym-mtvk-kspy-hpytsvyym-vhshykvm-chvk-hgblt-shkr-trchh-nky-tsba-hgnh-lyshral-vkvchvt-hbytchvn-vnpgay-pavlvt-aybh-htshpv-2026-nkns-ltvkf-byvny-2026-vmsdyr-at-zh-mh-hshtnh-hchvk-kvba-tkrh-lskvm-shavrk-dyn-av-chbrh-shmtmchh-bmytsvy-zkvyvt-rshaym-lgbvt-htkrh-chlh-al-tbyah-lhkrh-kbyat-achvzy-nkvt-aravrym-hchmrt-mtsb-vnkvt-mvsbt-hlyk-hkrh-mla-kvll-yytsvg-bvvadh-rpvayt-4000-bptycht-htyk-vavd-16000-al-20-nkvt-v-800-lkl-achvz-nvsf-btbyah-mvrkbt-shhvgshh-shnym-achry-hayrva-mtvvspym-8000-yytsvg-bvvadh-rpvayt-blbd-2000-bptycht-htyk-vavd-600-lkl-achvz-nkvt-lkl-hskvmym-mtvvsf-mam-dvgmh-bhlyk-mla-shhstyym-b-30-nkvt-htkrh-hya-28000-4000-16000-10-800-lpny-mam-vam-htbyah-hvkrh-kmvrkbt-mtvvspym-lh-8000-pryst-tshlvmym-at-shkr-htrchh-apshr-lprvs-l-60-tshlvmym-chvdshyym-lpchvt-bly-rybyt-vhtsmdh-ayn-tsvrk-lhvtsya-skvm-gdvl-bbt-acht-am-kbr-chtmt-al-hskm-hchvk-chl-gm-achvrh-al-hskmym-shnchtmv-maz-7-bavktvbr-2023-my-shshylm-yvtr-mhtkrh-zkay-ldrvsh-hchzr-shl-havdf-kday-lhvtsya-at-hhskm-vlhshvvt-avtv-ltkrvt-mh-hchvk-la-mshnh-htkrh-mgbylh-at-hmchyr-vhya-la-mbtychh-hkrh-av-achvzy-nkvt-kshhmchyr-mvgbl-kday-lshavl-achrt-my-ytpl-btyk-bpval-kmh-nysyvn-ysh-lv-mvl-mshrd-hbytchvn-vmh-klvl-byytsvg-lpny-shchvtmym-bksh-hskm-shkr-trchh-bktb-am-hskvm-vmvady-htshlvm-vda-shhskvm-aynv-chvrg-mhtkrh-vshhmam-mtsvyn-bnprd-shal-mh-kvrh-am-tydrsh-lhmshyk-lhlyk-nvsf-kmv-aravr-av-hchmrh-al-tchtvm-tcht-lchts-ysh-lk-zmn-lkrva-vlhtyyats-bmshrdnv-btyky-nky-tshl-vnpgay-pavlvt-aybh-shkr-htrchh-nkba-lpy-hchvk-bshkypvt-mlah-vlla-hptavt-hmyda-bmamr-klly-vaynv-mhvvh-yyavts-mshpty-lmkrh-shlk-apshr-lpnvt-lmshrd-lbdykh" class="nav-link">החוק להגבלת שכר טרחה לנכי צה"ל ונפגעי פעולות איבה: מה זה אומר עבורך?  עד היום, מי שנפגע בשירותו ופנה לעורך דין לא ידע מראש כמה זה יעלה לו. היו מי שגבו מאות אלפי שקלים מתוך כספי הפיצויים והשיקום. חוק הגבלת שכר טרחה (נכי צבא הגנה לישראל וכוחות הביטחון ונפגעי פעולות איבה), התשפ"ו-2026, נכנס לתוקף ביוני 2026 ומסדיר את זה.  מה השתנה  החוק קובע תקרה לסכום שעורך דין, או חברה שמתמחה במיצוי זכויות, רשאים לגבות. התקרה חלה על תביעה להכרה, קביעת אחוזי נכות, ערעורים, החמרת מצב ונכות מוסבת.  הליך הכרה מלא, כולל ייצוג בוועדה רפואית: 4,000 ₪ בפתיחת התיק, ועוד 16,000 ₪ על 20% נכות ו-800 ₪ לכל אחוז נוסף. בתביעה מורכבת, שהוגשה שנים אחרי האירוע, מתווספים 8,000 ₪. ייצוג בוועדה רפואית בלבד: 2,000 ₪ בפתיחת התיק, ועוד 600 ₪ לכל אחוז נכות. לכל הסכומים מתווסף מע"מ.  דוגמה: בהליך מלא שהסתיים ב-30% נכות, התקרה היא 28,000 ₪ (4,000 + 16,000 + 10 × 800) לפני מע"מ, ואם התביעה הוכרה כמורכבת מתווספים לה 8,000 ₪.  פריסת תשלומים  את שכר הטרחה אפשר לפרוס ל-60 תשלומים חודשיים לפחות, בלי ריבית והצמדה. אין צורך להוציא סכום גדול בבת אחת.  אם כבר חתמת על הסכם  החוק חל גם אחורה, על הסכמים שנחתמו מאז 7 באוקטובר 2023. מי ששילם יותר מהתקרה זכאי לדרוש החזר של העודף. כדאי להוציא את ההסכם ולהשוות אותו לתקרות.  מה החוק לא משנה  התקרה מגבילה את המחיר, והיא לא מבטיחה הכרה או אחוזי נכות. כשהמחיר מוגבל, כדאי לשאול אחרת: מי יטפל בתיק בפועל, כמה ניסיון יש לו מול משרד הביטחון, ומה כלול בייצוג.  לפני שחותמים  בקש הסכם שכר טרחה בכתב, עם הסכום ומועדי התשלום. ודא שהסכום אינו חורג מהתקרה, ושהמע"מ מצוין בנפרד. שאל מה קורה אם תידרש להמשיך להליך נוסף, כמו ערעור או החמרה. אל תחתום תחת לחץ. יש לך זמן לקרוא ולהתייעץ.  במשרדנו, בתיקי נכי צה"ל ונפגעי פעולות איבה, שכר הטרחה נקבע לפי החוק, בשקיפות מלאה וללא הפתעות.  המידע במאמר כללי ואינו מהווה ייעוץ משפטי. למקרה שלך אפשר לפנות למשרד לבדיקה</a></li></ul></li></ul></div>
     
     
     
@@ -1498,7 +1616,7 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
     <div class="footer-top">
       <!-- Company Info -->
       <div class="footer-col footer-company-col">
-        <img src="/assets/legal-services-logo.webp" alt="אבי בן דוד, עו&quot;ד" class="logo" data-element-type="image" data-element-id="img-1783147135186-rm4jrfg6e" data-zappy-footer-image="true" decoding="async" width="35" height="35">
+        <img src="/assets/legal-services-logo.webp" alt="אבי בן דוד, עו&quot;ד" class="logo" data-element-type="image" data-element-id="img-1783147135186-rm4jrfg6e" data-zappy-footer-image="true"  decoding="async" width="35" height="35">
         <p class="footer-tagline">ייצוג משפטי מקצועי, אישי ומסור. אנו מלווים אתכם בכל שלב בדרך לפתרון המיטבי.</p>
       </div>
 
@@ -1516,11 +1634,11 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
 
       <!-- Contact Info -->
       <div class="footer-col footer-contact-col">
-        <h4>צור קשר</h4>
+        <h4 >צור קשר</h4>
         <ul class="footer-contact">
           <li>
             <span class="contact-icon"><i class="fas fa-envelope" data-element-type="icon" data-element-id="icon-1783147135185-o5eesg3uf" data-icon-type="fontawesome"></i></span>
-            <span class="contact-text"><a href="mailto:Avibd@bendavidlaw.co.il">avibd@bendavidlaw.co.il</a></span>
+            <span class="contact-text"><a href="mailto:Avibd@bendavidlaw.co.il" >avibd@bendavidlaw.co.il</a></span>
           </li>
           <li>
             <span class="contact-icon"><i class="fas fa-phone" data-element-type="icon" data-element-id="icon-1783147135186-hdd853mmy" data-icon-type="fontawesome"></i></span>
