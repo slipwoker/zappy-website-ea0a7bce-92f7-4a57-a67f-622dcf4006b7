@@ -1,4 +1,4 @@
-# אבי בן דוד, עו"ד — Generative Engine Optimization Map
+# אבי בן דוד, עו״ד — Generative Engine Optimization Map
 
 > A family and personal law attorney offering legal services in family matters, personal status law, representation before the National Insurance Institute, and the Ministry of Defense. The website should have a fresh, modern, and approachable feel — not heavy or overly formal — with a floating WhatsApp contact button, a client testimonials section, and a blog/articles area. The attorney has provided their own logo and personal photos for use on the site.
 
@@ -101,7 +101,7 @@ Information about WCAG compliance and accessibility features.
 
 # Business Context (for LLM understanding)
 
-## About אבי בן דוד, עו"ד
+## About אבי בן דוד, עו״ד
 A family and personal law attorney offering legal services in family matters, personal status law, representation before the National Insurance Institute, and the Ministry of Defense. The website should have a fresh, modern, and approachable feel — not heavy or overly formal — with a floating WhatsApp contact button, a client testimonials section, and a blog/articles area. The attorney has provided their own logo and personal photos for use on the site.
 
 ## Target Audience
