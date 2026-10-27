@@ -8213,6 +8213,62 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .contact-contact-intro-section .contact-cta-btn-wa:hover {
   background: var(--bg-light);
 }
+
+.navbar .nav-phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nav-text, var(--text-dark));
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 8px 12px;
+}
+
+.navbar .nav-phone-link:hover {
+  color: var(--nav-text-hover, var(--text-muted));
+}
+
+.navbar .nav-phone-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+}
+
+.navbar .nav-phone-link:hover .nav-phone-icon {
+  background: var(--accent);
+}
+
+@media (max-width: 768px) {
+.navbar .nav-phone-link {
+  position: absolute;
+  left: 12px;
+  right: auto;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  z-index: 1002;
+  height: 36px;
+  padding: 0;
+}
+
+.navbar .nav-phone-text {
+  display: none;
+}
+
+.navbar .nav-phone-icon {
+  width: 36px;
+  height: 36px;
+}
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
