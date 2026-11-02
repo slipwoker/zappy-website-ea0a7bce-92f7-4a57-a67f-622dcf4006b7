@@ -62,25 +62,8 @@ https://bendavidlaw.co.il/blog/podcast-nechei-tzahal
 https://bendavidlaw.co.il/hchvk-lhgblt-shkr-tyrchh-lnky-tshl-vnpgay-pavlvt-aybh
 החוק החדש מגביל את שכר הטרחה שעורכי דין וחברות מימוש זכויות גובים מנכי צה״ל ונפגעי פעולות איבה. מה התקרה, פריסת תשלומים, ומה לבדוק לפני שחותמים.
 
-### בלוג משפטי | אבי בן דוד, עו״ד
-https://bendavidlaw.co.il/blog-020094
-אבי בן דוד, עו״ד - בלוג משפטי | אבי בן דוד, עו״ד
-
-### מזונות
-https://bendavidlaw.co.il/blog/alimony-custody-guide
-מדריך בסיסי להבנת מזונות ילדים, זמני שהות, אחריות הורית ושינוי נסיבות בהליכי משפחה.
-
-### גירושין
-https://bendavidlaw.co.il/blog/lawyer-role-divorce-0114
-מה כולל ליווי משפטי בהליך גירושין, כיצד מתכוננים נכון, ומתי משא ומתן יכול להיות יעיל יותר ממאבק.
-
-### ייפוי כוח
-https://bendavidlaw.co.il/blog/enduring-power-family
-הסבר נגיש על ייפוי כוח מתמשך, בחירת מיופה כוח, תחומי ההחלטה והחשיבות של תכנון מראש.
-
-### יישוב סכסוך
-https://bendavidlaw.co.il/blog/dispute-resolution-family
-מהי בקשה ליישוב סכסוך, כיצד מתנהלות פגישות ביחידת הסיוע, ומה כדאי להכין לפני שמתחילים.
+### Page
+https://bendavidlaw.co.il/alimony-custody
 
 ## Legal & Policy
 
@@ -111,11 +94,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
+  - `name` (text)
   - `email` (email)
-  - `phone` (tel, required)
-  - `message` (textarea, required)
-  - `privacy_consent` (checkbox, required)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
 
 ---
 
