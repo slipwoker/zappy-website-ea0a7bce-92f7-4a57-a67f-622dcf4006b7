@@ -66,6 +66,9 @@ https://bendavidlaw.co.il/hchvk-lhgblt-shkr-tyrchh-lnky-tshl-vnpgay-pavlvt-aybh
 https://bendavidlaw.co.il/alimony-custody
 מזונות ילדים, משמורת והסדרי שהות, תביעה להפחתה או להגדלת מזונות וגישור. משרד עורכי דין בן דוד, חיפה. שיחה ראשונה: 054-4544546
 
+### Page
+https://bendavidlaw.co.il/prenup-property
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -95,11 +98,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
+  - `name` (text)
   - `email` (email)
-  - `phone` (tel, required)
-  - `message` (textarea, required)
-  - `privacy_consent` (checkbox, required)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
 
 ---
 
