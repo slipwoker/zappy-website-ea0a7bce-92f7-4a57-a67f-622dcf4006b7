@@ -58,10 +58,6 @@ https://bendavidlaw.co.il/blog/lawyer-role-divorce
 https://bendavidlaw.co.il/blog/podcast-nechei-tzahal
 אבי בן דוד, עו״ד - פודקאסט נכי צה״ל: שיחות על זכויות, שיקום והכרה
 
-### החוק להגבלת שכר טירחה לנכי צה"ל ונפגעי פעולות איבה
-https://bendavidlaw.co.il/hchvk-lhgblt-shkr-tyrchh-lnky-tshl-vnpgay-pavlvt-aybh
-החוק החדש מגביל את שכר הטרחה שעורכי דין וחברות מימוש זכויות גובים מנכי צה״ל ונפגעי פעולות איבה. מה התקרה, פריסת תשלומים, ומה לבדוק לפני שחותמים.
-
 ### עורך דין מזונות ומשמורת בחיפה | אבי בן דוד
 https://bendavidlaw.co.il/alimony-custody
 מזונות ילדים, משמורת והסדרי שהות, תביעה להפחתה או להגדלת מזונות וגישור. משרד עורכי דין בן דוד, חיפה. שיחה ראשונה: 054-4544546
@@ -106,7 +102,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email)
   - `phone` (tel, required)
-  - `message` (textarea, required)
+  - `message` (textarea)
   - `privacy_consent` (checkbox, required)
 
 ---
