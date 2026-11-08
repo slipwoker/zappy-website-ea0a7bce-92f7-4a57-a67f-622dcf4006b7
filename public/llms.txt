@@ -70,6 +70,9 @@ https://bendavidlaw.co.il/alimony-custody
 https://bendavidlaw.co.il/prenup-property
 הסכם ממון לפני או אחרי הנישואין, הסכם חיים משותפים וחלוקת רכוש בגירושין, כולל אישור ההסכם בבית המשפט. משרד עורכי דין בן דוד, חיפה.
 
+### Page
+https://bendavidlaw.co.il/idf-disabled
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -99,11 +102,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
+  - `name` (text)
   - `email` (email)
-  - `phone` (tel, required)
-  - `message` (textarea, required)
-  - `privacy_consent` (checkbox, required)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
 
 ---
 
