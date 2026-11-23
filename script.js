@@ -4921,7 +4921,12 @@ function fixContrast(){
             }
           }
           var priceEl = block.querySelector('.shipping-price.free');
-          if (priceEl) priceEl.textContent = getText('free');
+          if (priceEl) {
+            // Free-shipping methods may carry the struck-through original price
+            // next to the label; translate only the label, keep the price.
+            var freeLabelEl = priceEl.querySelector('.shipping-free-label') || priceEl;
+            freeLabelEl.textContent = getText('free');
+          }
           var addressEl = block.querySelector('.shipping-address');
           var addressText = formatPickupAddress(method);
           if (addressEl && addressText) addressEl.textContent = addressText;
