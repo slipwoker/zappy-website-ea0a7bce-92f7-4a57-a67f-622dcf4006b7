@@ -98,6 +98,9 @@ https://bendavidlaw.co.il/how-to-write-a-will
 https://bendavidlaw.co.il/inheritance-order
 מתי מבקשים צו ירושה ומתי צו קיום צוואה, איך מגישים לרשם לענייני ירושה באופן מקוון, מה מצרפים, ומתי התיק עובר לבית המשפט לענייני משפחה.
 
+### Page
+https://bendavidlaw.co.il/inheritance-without-will
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -127,11 +130,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
+  - `name` (text)
   - `email` (email)
-  - `phone` (tel, required)
+  - `phone` (tel)
   - `message` (textarea)
-  - `privacy_consent` (checkbox, required)
+  - `privacy_consent` (checkbox)
 
 ---
 
