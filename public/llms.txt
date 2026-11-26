@@ -102,8 +102,9 @@ https://bendavidlaw.co.il/inheritance-order
 https://bendavidlaw.co.il/inheritance-without-will
 מי יורש כשאין צוואה: בן הזוג, הילדים, ההורים, האחים והסבים. כמה מקבל בן הזוג, מתי הוא מקבל את הדירה ותכולת הבית, ומה קורה כשאין יורשים בכלל.
 
-### Page
+### איך מגישים התנגדות לצוואה? | אבי בן דוד עו״ד
 https://bendavidlaw.co.il/will-objection
+מי יכול להתנגד לצוואה, על מה אפשר להתנגד, תוך כמה זמן מהפרסום, אילו מסמכים מגישים לרשם לענייני ירושה, ומה קורה כשהתיק עובר לבית המשפט.
 
 ## Legal & Policy
 
@@ -137,7 +138,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email)
   - `phone` (tel, required)
-  - `message` (textarea, required)
+  - `message` (textarea)
   - `privacy_consent` (checkbox, required)
 
 ---
