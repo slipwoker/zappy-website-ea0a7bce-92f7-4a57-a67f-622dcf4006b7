@@ -78,6 +78,9 @@ https://bendavidlaw.co.il/podcast-medical-committee-tips
 https://bendavidlaw.co.il/podcast-ptsd-invisible-injury
 עו״ד אבי בן דוד, חיפה, בפרק קצר מהפודקאסט: למה פוסט טראומה היא פציעה שלא רואים, ואיך מחלקים את העבודה. הפצוע מתמקד בטיפול, ואני מטפל מול משרד הביטחון.
 
+### Page
+https://bendavidlaw.co.il/how-to-start-divorce
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -107,11 +110,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
+  - `name` (text)
   - `email` (email)
-  - `phone` (tel, required)
-  - `message` (textarea, required)
-  - `privacy_consent` (checkbox, required)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
 
 ---
 
