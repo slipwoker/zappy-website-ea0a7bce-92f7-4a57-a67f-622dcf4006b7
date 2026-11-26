@@ -94,8 +94,9 @@ https://bendavidlaw.co.il/poa-or-guardian
 https://bendavidlaw.co.il/how-to-write-a-will
 ארבע הדרכים לערוך צוואה לפי חוק הירושה, מה גורם לבטלות צוואה, מי לא יכול להיות עד ולמה כדאי להפקיד אצל הרשם. הסבר בשפה פשוטה.
 
-### Page
+### איך מוציאים צו ירושה? שלב אחר שלב | אבי בן דוד עו״ד
 https://bendavidlaw.co.il/inheritance-order
+מתי מבקשים צו ירושה ומתי צו קיום צוואה, איך מגישים לרשם לענייני ירושה באופן מקוון, מה מצרפים, ומתי התיק עובר לבית המשפט לענייני משפחה.
 
 ## Legal & Policy
 
@@ -129,7 +130,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email)
   - `phone` (tel, required)
-  - `message` (textarea, required)
+  - `message` (textarea)
   - `privacy_consent` (checkbox, required)
 
 ---
