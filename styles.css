@@ -8426,6 +8426,17 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 /* zappy-self-heal */
 .blog-blog-article-section__note { color: var(--text-muted, var(--secondary-color, var(--secondary, #B8B8B8))) !important; }
 
+
+#layout-1795706683175 .container ul {
+  list-style: disc;
+  padding-right: 1.5rem;
+  text-align: right;
+  direction: rtl;
+}
+/* zappy-self-heal */
+#layout-1795706683175 .container ul { list-style: disc !important; }
+#layout-1795706683175 .container ul { padding-right: 1.5rem !important; }
+
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
