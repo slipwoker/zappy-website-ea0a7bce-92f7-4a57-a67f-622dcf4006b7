@@ -106,8 +106,9 @@ https://bendavidlaw.co.il/inheritance-without-will
 https://bendavidlaw.co.il/will-objection
 מי יכול להתנגד לצוואה, על מה אפשר להתנגד, תוך כמה זמן מהפרסום, אילו מסמכים מגישים לרשם לענייני ירושה, ומה קורה כשהתיק עובר לבית המשפט.
 
-### Page
+### ידועים בציבור: זכויות, רכוש וירושה | אבי בן דוד עו״ד
 https://bendavidlaw.co.il/known-in-public
+מה צריך כדי שיכירו בכם כידועים בציבור, מה קורה לרכוש בפרידה, מתי בן הזוג יורש ומה מעמד הילדים. הסבר בשפה פשוטה.
 
 ## Legal & Policy
 
@@ -141,7 +142,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email)
   - `phone` (tel, required)
-  - `message` (textarea, required)
+  - `message` (textarea)
   - `privacy_consent` (checkbox, required)
 
 ---
