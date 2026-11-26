@@ -86,6 +86,9 @@ https://bendavidlaw.co.il/how-to-start-divorce
 https://bendavidlaw.co.il/sirov-get
 בן הזוג לא מסכים לתת גט או לקבל גט? מה בית הדין הרבני יכול לעשות, מהם צווי הגבלה, ומה אפשר לבקש בבית המשפט לענייני משפחה. הסבר בשפה פשוטה.
 
+### Page
+https://bendavidlaw.co.il/poa-or-guardian
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -118,7 +121,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email)
   - `phone` (tel, required)
-  - `message` (textarea)
+  - `message` (textarea, required)
   - `privacy_consent` (checkbox, required)
 
 ---
