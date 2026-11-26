@@ -106,6 +106,9 @@ https://bendavidlaw.co.il/inheritance-without-will
 https://bendavidlaw.co.il/will-objection
 מי יכול להתנגד לצוואה, על מה אפשר להתנגד, תוך כמה זמן מהפרסום, אילו מסמכים מגישים לרשם לענייני ירושה, ומה קורה כשהתיק עובר לבית המשפט.
 
+### Page
+https://bendavidlaw.co.il/known-in-public
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -135,11 +138,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
+  - `name` (text)
   - `email` (email)
-  - `phone` (tel, required)
+  - `phone` (tel)
   - `message` (textarea)
-  - `privacy_consent` (checkbox, required)
+  - `privacy_consent` (checkbox)
 
 ---
 
