@@ -90,8 +90,9 @@ https://bendavidlaw.co.il/sirov-get
 https://bendavidlaw.co.il/poa-or-guardian
 ייפוי כוח מתמשך או אפוטרופוס להורה מבוגר? מה ההבדל, מי בוחר את מקבל ההחלטות, ומה עושים כשההורה כבר לא יכול לחתום. הסבר בשפה פשוטה.
 
-### Page
+### איך מצמצמים סיכוי להתנגדות לצוואה | אבי בן דוד עו״ד
 https://bendavidlaw.co.il/how-to-write-a-will
+ארבע הדרכים לערוך צוואה לפי חוק הירושה, מה גורם לבטלות צוואה, מי לא יכול להיות עד ולמה כדאי להפקיד אצל הרשם. הסבר בשפה פשוטה.
 
 ## Legal & Policy
 
@@ -125,7 +126,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email)
   - `phone` (tel, required)
-  - `message` (textarea, required)
+  - `message` (textarea)
   - `privacy_consent` (checkbox, required)
 
 ---
