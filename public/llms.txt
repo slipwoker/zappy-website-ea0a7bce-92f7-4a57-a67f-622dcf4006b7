@@ -90,6 +90,9 @@ https://bendavidlaw.co.il/sirov-get
 https://bendavidlaw.co.il/poa-or-guardian
 ייפוי כוח מתמשך או אפוטרופוס להורה מבוגר? מה ההבדל, מי בוחר את מקבל ההחלטות, ומה עושים כשההורה כבר לא יכול לחתום. הסבר בשפה פשוטה.
 
+### Page
+https://bendavidlaw.co.il/how-to-write-a-will
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -119,11 +122,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
+  - `name` (text)
   - `email` (email)
-  - `phone` (tel, required)
+  - `phone` (tel)
   - `message` (textarea)
-  - `privacy_consent` (checkbox, required)
+  - `privacy_consent` (checkbox)
 
 ---
 
