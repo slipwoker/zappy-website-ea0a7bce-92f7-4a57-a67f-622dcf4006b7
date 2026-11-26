@@ -86,8 +86,9 @@ https://bendavidlaw.co.il/how-to-start-divorce
 https://bendavidlaw.co.il/sirov-get
 בן הזוג לא מסכים לתת גט או לקבל גט? מה בית הדין הרבני יכול לעשות, מהם צווי הגבלה, ומה אפשר לבקש בבית המשפט לענייני משפחה. הסבר בשפה פשוטה.
 
-### Page
+### ייפוי כוח מתמשך או אפוטרופוס להורה מבוגר | אבי בן דוד עו״ד
 https://bendavidlaw.co.il/poa-or-guardian
+ייפוי כוח מתמשך או אפוטרופוס להורה מבוגר? מה ההבדל, מי בוחר את מקבל ההחלטות, ומה עושים כשההורה כבר לא יכול לחתום. הסבר בשפה פשוטה.
 
 ## Legal & Policy
 
@@ -121,7 +122,7 @@ Information about WCAG compliance and accessibility features.
   - `name` (text, required)
   - `email` (email)
   - `phone` (tel, required)
-  - `message` (textarea, required)
+  - `message` (textarea)
   - `privacy_consent` (checkbox, required)
 
 ---
