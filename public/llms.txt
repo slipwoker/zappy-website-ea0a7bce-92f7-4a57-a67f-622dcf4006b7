@@ -82,6 +82,9 @@ https://bendavidlaw.co.il/podcast-ptsd-invisible-injury
 https://bendavidlaw.co.il/how-to-start-divorce
 הצעד הראשון בגירושין הוא בקשה ליישוב סכסוך. מה קורה בפגישות המהו״ת, מתי אפשר להגיש תביעה ואיפה מסדרים את הגט. עו״ד אבי בן דוד, חיפה.
 
+### Page
+https://bendavidlaw.co.il/sirov-get
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -111,11 +114,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
+  - `name` (text)
   - `email` (email)
-  - `phone` (tel, required)
+  - `phone` (tel)
   - `message` (textarea)
-  - `privacy_consent` (checkbox, required)
+  - `privacy_consent` (checkbox)
 
 ---
 
